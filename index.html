@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="iCorpMM">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <title>iCorpMM</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="dist/style.css" />
+        <link rel="stylesheet" href="dist/css/sidebar.css"/>
+    </head>
+
+    <body>
+        <div id="dvLoading"></div> 
+        <div id="wrapper" ng-cloak >
+            <div class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate">
+                <ul class="sidebar-nav list collapsibleList" id="accordion">
+                    <li class="parent"><div class="ul-heading"><a href="offers.html"><i class="fa fa-caret-right mr6"></i> Schedule</a></div></li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <div id="page-content-wrapper">
+                <!-- /#header inlcude -->
+                <div ng-include="'header.html'"></div>
+                <div class="container-fluid" ng-controller="homeController">
+                    <p>Welcome!</p>
+                </div>
+            </div>
+
+            <script src="phonegap.js"></script>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/angular.min.js"></script>
+            <script src="js/angular-resource.min.js"></script>
+            <script src='js/angular-sanitize.min.js'></script>
+            <script src="dist/js/sidebar.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+            <script src="js/myscripts.js"></script>
+            <script type="text/javascript">
+
+                    $(document).ready(function () {
+
+                        $("body").on("click", "#accordion li.parent", function () {
+                            if (false == $(this).children("ul").is(':visible')) {
+                                $('#accordion ul').slideUp(300);
+                            }
+                            $(this).children("ul").slideToggle(300);
+                        });
+                    });
+
+
+
+
+            </script>
+
+
+
+    </body>
+</html>
