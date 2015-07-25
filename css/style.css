@@ -341,7 +341,7 @@ p {
     font-size: 16px;
 }
 
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{ border:none; background-color:#FAFBFB; color:#449D44;}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{ border:none; background-color:rgb(221, 72, 20); color:#449D44;}
 .navbar-toggle, .navbar-toggle:hover { border:none !important; color:#449D44  !important;}
 .icon-bar { background-color:#fff  !important;}
 

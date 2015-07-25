@@ -4,7 +4,7 @@
     <author href="http://5u5hil.wordpress.com" email="sushil.sud@gmail.com">Sushil Sudhakaran</author>
     <preference name="phonegap-version" value="cli-5.1.1" />
     <preference name="orientation" value="portrait" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
     <preference name="permissions" value="none"/>
     <preference name="webviewbounce" value="true" />
     
@@ -14,6 +14,6 @@
     <gap:splash src="splash.png" />
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
-    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
+    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
 
 </widget>
