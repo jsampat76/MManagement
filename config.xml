@@ -8,10 +8,12 @@
     <preference name="permissions" value="none"/>
     <preference name="webviewbounce" value="true" />
     
+    <gap:platform name="ios" />
     
     <icon src="icon.png" />
     <gap:splash src="splash.png" />
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
+    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
 </widget>
