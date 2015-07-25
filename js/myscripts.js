@@ -1,7 +1,12 @@
-var domain = "http://icorpmm.com/";
+$(document).ready(function () {
 
-var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
+    
 
-app.controller('homeController', function ($scope, $http) {
-    $("#dvLoading").hide();
+    $("body").on("click", "#accordion li.parent", function () {
+        if (false === $(this).children("ul").is(':visible')) {
+            $('#accordion ul').slideUp(300);
+        }
+        $(this).children("ul").slideToggle(300);
+    });
+
 });
