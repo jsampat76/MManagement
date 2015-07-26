@@ -36,9 +36,9 @@
                                 </tr>
                                 <tr ng-repeat="proposal in proposals">
                                     <td>{{ proposal.title}}</td>
-                                    <td>{{ proposal.start_date}}</td>
-                                    <td>{{ proposal.end_date}}</td>
-                                    <td>{{ proposal.venue_id}}</td>
+                                    <td>{{ proposal.start_date | convertToDate | date:'dd, MMMM yyyy'}}</td>
+                                    <td>{{ proposal.end_date | convertToDate | date:'dd, MMMM yyyy'}}</td>
+                                    <td>{{ proposal.venue.venue_name}}</td>
                                     <td><a href="confirm-timings.html?id={{proposal.id}}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i> View/Select Time</a></td>
                                 </tr>
                             </table>

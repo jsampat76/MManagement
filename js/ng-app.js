@@ -1,6 +1,12 @@
-var domain = "http://icorpmm.lu/";
+var domain = "http://www.boxcommerce.in/icorpmm/";
 
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
+
+app.filter('convertToDate', function () {
+    return function (str) {
+        return new Date(str);
+    };
+});
 
 app.controller('loginController', function ($scope, $http) {
     $('.spinner').fadeOut(1000);
@@ -49,4 +55,62 @@ app.controller('schedulerController', function ($scope, $http) {
         $scope.proposals = $.parseJSON(window.localStorage.getItem("proposals"));
         $('.spinner').fadeOut(1000);
     }
+
+
+
+
+
+});
+
+app.controller('confirmTimingsController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "get-schedule",
+            type: 'GET',
+            data: {id: getUrlParameter("id"), userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("schedule_" + getUrlParameter("id"), JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.proposal = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.proposal = $.parseJSON(window.localStorage.getItem("schedule_" + getUrlParameter("id")));
+        $('.spinner').fadeOut(1000);
+    }
+
+
+    $scope.confirm = function (event, id, status, time) {
+        var url = domain + "confirm";
+        var data = {id: id, userId: window.localStorage.getItem("id"), status: status, time: time};
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                success: function (response) {
+                    if (status == 1) {
+                        angular.element(event.target).parent().html('<span class="text-success"><i class="fa fa-check"></i> Available</span>');
+                    } else {
+                        angular.element(event.target).parent().html('<span class="text-danger"><i class="fa fa-ban"></i> Unavailable</span>');
+                    }
+                }
+            });
+            angular.element(event.target).parent().parent().find("select").prop("disabled", "disabled");
+
+        } else {
+            angular.element(event.target).parent().parent().find("select").prop("disabled", "disabled");
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
 });

@@ -1,6 +1,32 @@
 $(document).ready(function () {
 
-    
+    if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
+        window.localStorage.setItem("toSync", JSON.stringify([]));
+    } else {
+        if (navigator.onLine === true) {
+            var toSync = $.parseJSON(window.localStorage.getItem("toSync"));
+
+            $.each(toSync, function (i, k) {
+                var index = i;
+                $.ajax({
+                    url: k.url,
+                    type: 'GET',
+                    data: k.data,
+                    success: function (response) {
+
+
+                    }
+                });
+
+
+            });
+
+
+
+        }
+    }
+
+
 
     $("body").on("click", "#accordion li.parent", function () {
         if (false === $(this).children("ul").is(':visible')) {
@@ -10,3 +36,20 @@ $(document).ready(function () {
     });
 
 });
+
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
+function toSync(url, data) {
+    var toSync = $.parseJSON(window.localStorage.getItem("toSync"));
+    toSync.push({url: url, data: data});
+    window.localStorage.setItem("toSync", JSON.stringify(toSync));
+}
