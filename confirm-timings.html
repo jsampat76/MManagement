@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="dist/css/sidebar.css"/>
     </head>
 
-    <body>
+    <body ng-cloak>
         <div class="spinner">
             <div class="ajaxloader"></div>
         </div>
@@ -59,11 +59,11 @@
                                     <th>Action</th>
                                 </tr>
                                 <tr ng-repeat="date in proposal.dates">
-                                    <td>{{ date.date | convertToDate | date:'dd, MMMM yyyy'}}</td>
-                                    <td ng-show="date.confirmation === null"><select ng-model="time" ng-init="time = 'fullday'" class="form-control input-sm"><option value="fullday">Full Day</option><option value="09:00">09:00 AM</option><option value="11:00">11:00 AM</option><option value="14:00">02:00 PM</option><option value="16:00">04:00 PM</option></select></td>
-                                    <td ng-show="date.confirmation !== null"><span class="label label-success" ng-show="date.confirmation.pivot.status === 1">{{ date.confirmation.pivot.proposal_time | uppercase }}</span><span class="label label-danger" ng-show="date.confirmation.pivot.status === 0">N/A</span></td>
-                                    <td ng-show="date.confirmation === null"><a href="#" ng-click="confirm($event, date.id, 1, time)" class="btn btn-xs btn-success confirm"><i class="fa fa-check"></i> Confirm</a> <a href="#" ng-click="confirm($event, date.id, 0, time)" class="btn btn-xs btn-danger unconfirm"><i class="fa fa-ban"></i> Unavailable</a></td>
-                                    <td ng-show="date.confirmation !== null"><span class="text-success" ng-show="date.confirmation.pivot.status === 1"><i class="fa fa-check"></i> Available</span><span class="text-danger" ng-show="date.confirmation.pivot.status === 0"><i class="fa fa-ban"></i> UnAvailable</span></td>
+                                    <td>{{ date.date | convertToDate | date:'dd, MMMM yyyy'   }}</td>
+                                    <td ng-show="!date.confirmation"><select ng-model="time" ng-init="time = 'fullday'" class="form-control input-sm"><option value="fullday">Full Day</option><option value="09:00">09:00 AM</option><option value="11:00">11:00 AM</option><option value="14:00">02:00 PM</option><option value="16:00">04:00 PM</option></select></td>
+                                    <td ng-show="date.confirmation"><span class="label label-success" ng-show="date.confirmation.pivot.status == 1">{{ date.confirmation.pivot.proposal_time | uppercase }}</span><span class="label label-danger" ng-show="date.confirmation.pivot.status == 0">N/A</span></td>
+                                    <td ng-show="!date.confirmation"><a href="#" ng-click="confirm($event, date.id, 1, time)" class="btn btn-xs btn-success confirm"><i class="fa fa-check"></i> Confirm</a> <a href="#" ng-click="confirm($event, date.id, 0, time)" class="btn btn-xs btn-danger unconfirm"><i class="fa fa-ban"></i> Unavailable</a></td>
+                                    <td ng-show="date.confirmation"><span class="text-success" ng-show="date.confirmation.pivot.status == 1"><i class="fa fa-check"></i> Available</span><span class="text-danger" ng-show="date.confirmation.pivot.status == 0"><i class="fa fa-ban"></i> UnAvailable</span></td>
                                 </tr>
                             </table>
                         </div>

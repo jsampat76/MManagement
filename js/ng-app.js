@@ -113,4 +113,5 @@ app.controller('confirmTimingsController', function ($scope, $http) {
 
         }
     };
+
 });
