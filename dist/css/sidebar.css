@@ -36,7 +36,7 @@
 .sidebar {
     position: fixed;
     display: block;
-    top: 50px;
+    top: 45px;
     bottom: 0;
     z-index: 1000;
     min-height: 80%;

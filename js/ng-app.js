@@ -115,3 +115,48 @@ app.controller('confirmTimingsController', function ($scope, $http) {
     };
 
 });
+
+
+app.controller('meetingsController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "meetings",
+            type: 'GET',
+            data: {id: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("meetings", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.meetings = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.meetings = $.parseJSON(window.localStorage.getItem("meetings"));
+        $('.spinner').fadeOut(1000);
+    }
+});
+
+
+app.controller('joinMeetingController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "get-meeting",
+            type: 'GET',
+            data: {id: getUrlParameter("id"), userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.meeting = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.meeting = $.parseJSON(window.localStorage.getItem("meeting_" + getUrlParameter("id")));
+        $('.spinner').fadeOut(1000);
+    }
+
+});
