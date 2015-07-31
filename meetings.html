@@ -37,8 +37,8 @@
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
                                     <td>{{ meeting.title}}</td>
-                                    <td>{{ meeting.datetime_ofmeeting | convertToDate | date:'dd, MMMM yyyy hh:mm:ss a'}}</td>
-                                    <td>{{ meeting.group.name }}</td>
+                                    <td>{{ meeting.datetime_ofmeeting}}</td>
+                                    <td>{{ meeting.group.name}}</td>
                                     <td>{{ meeting.venue.venue_name}}</td>
                                     <td>{{ meeting.status | uppercase }}</td>
                                     <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-xs btn-info"><i class="fa fa-group"></i> Join</a></td>
