@@ -44,6 +44,13 @@ function tokenHandler(result) {
 
 }
 
+function progress(e) {
+    if (e.lengthComputable) {
+        //this makes a nice fancy progress bar
+        $('progress').attr({value: e.loaded, max: e.total});
+    }
+}
+
 
 
 

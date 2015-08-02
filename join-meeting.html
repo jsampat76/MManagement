@@ -92,7 +92,38 @@
                             </div>
 
                             <div class="tab-pane fade in " id="blist" ng-if="meeting.status == 'Scheduled'">
+                                <form name="agenda" ng-submit="submitAgenda()" enctype="multipart/form-data" id="frmNewAgenda">
+                                    <input type="hidden" id="isafinal" value="0" name="isafinal">
+                                    <input type="hidden" value="{{meeting.id}}" name="id" id="id" />
+                                    <div class="form-group col-md-12">
+                                        <label for="inputEmail" class="col-md-3 control-label">Title</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="title" class="form-control" name="title" id="title" placeholder="Agenda title" required>
+                                        </div>
+                                        <span class="text-danger" ng-show="agenda.title.$dirty && agenda.title.$dirty.$error.required">Please Enter a Valid Title.</span>
 
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="inputPassword" class="col-md-3 control-label">Agenda Text</label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control body" ng-model="body"  name="body" placeholder="Agenda text" required></textarea>
+                                        </div>
+                                        <span class="text-danger" ng-show="agenda.body.$dirty && agenda.body.$dirty.$error.required">Please Enter a Agenda Text.</span>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="inputPassword" class="col-md-3 control-label">Agenda Attachment</label>
+                                        <div class="col-md-9">
+                                            <input type="file" class="form-control" id="file" multiple name="file[]">            
+                                        </div>
+                                        <progress class="hide" value="0" max="100"></progress>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="submit" name="submit" id="submit" ng-model="submit" class="btn btn-success btn-xs" ng-disabled="agenda.$invalid" />
+
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>

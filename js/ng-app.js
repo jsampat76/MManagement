@@ -203,4 +203,41 @@ app.controller('joinMeetingController', function ($scope, $http) {
         }
     };
 
+    $scope.submitAgenda = function () {
+        var data = new FormData($('#frmNewAgenda')[0]);
+
+        var url = domain + "add-agenda";
+
+        if (navigator.onLine === true) {
+
+            //  angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                xhr: function () {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', progress, false);
+                    }
+                    return myXhr;
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+
+                }
+            });
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().parent().append('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
+
 });
