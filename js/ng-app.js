@@ -12,6 +12,11 @@ app.filter('unsafe', function ($sce) {
         return $sce.trustAsHtml(val);
     };
 });
+app.filter('base64decode', function () {
+    return function (str) {
+        return atob(str);
+    };
+});
 
 app.controller('loginController', function ($scope, $http) {
     $('.spinner').fadeOut(1000);
@@ -121,7 +126,6 @@ app.controller('confirmTimingsController', function ($scope, $http) {
 
 });
 
-
 app.controller('meetingsController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");
     if (navigator.onLine === true) {
@@ -142,7 +146,6 @@ app.controller('meetingsController', function ($scope, $http) {
         $('.spinner').fadeOut(1000);
     }
 });
-
 
 app.controller('joinMeetingController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");
@@ -210,7 +213,8 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
         if (navigator.onLine === true) {
 
-            //  angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
 
             $.ajax({
                 url: url,
@@ -227,6 +231,9 @@ app.controller('joinMeetingController', function ($scope, $http) {
                 contentType: false,
                 processData: false,
                 success: function (response) {
+                    $('#submit').children("i").removeAttr("class");
+                    $('#submit').removeAttr("disabled");
+                    $('#frmNewAgenda input[type="text"],textarea,input[type="file"]').val("");
 
                 }
             });
