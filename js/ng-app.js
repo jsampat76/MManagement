@@ -7,6 +7,11 @@ app.filter('convertToDate', function () {
         return new Date(str);
     };
 });
+app.filter('unsafe', function ($sce) {
+    return function (val) {
+        return $sce.trustAsHtml(val);
+    };
+});
 
 app.controller('loginController', function ($scope, $http) {
     $('.spinner').fadeOut(1000);
@@ -150,13 +155,52 @@ app.controller('joinMeetingController', function ($scope, $http) {
                 window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
                 $scope.$apply(function () {
                     $scope.meeting = response;
+
+                    $scope.confirmation = $.grep($scope.meeting.invities, function (e) {
+                        return e.id == window.localStorage.getItem("id");
+                    });
+
+
                 });
                 $('.spinner').fadeOut(1000);
             }
         });
     } else {
         $scope.meeting = $.parseJSON(window.localStorage.getItem("meeting_" + getUrlParameter("id")));
+        $scope.confirmation = $.grep($scope.meeting.invities, function (e) {
+            return e.id == window.localStorage.getItem("id");
+        });
         $('.spinner').fadeOut(1000);
     }
+
+
+    $scope.attend = function (event, id, attending) {
+        var url = domain + "meeting-confirm";
+        var data = {id: id, userId: window.localStorage.getItem("id"), vote: attending};
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                success: function (response) {
+                    if (attending == 1) {
+                        angular.element(event.target).parent().parent().html('<a href="#" class="btn btn-xs btn-success"> Acknowledged the receipt of the notice. Yes, confirmed attendance. </a>');
+                    } else {
+                        angular.element(event.target).parent().parent().html('<a href="#" class="btn btn-xs btn-danger"> Acknowledged the receipt of the notice. Not Attending, please grant leave. </a>');
+                    }
+                }
+            });
+
+        } else {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
 
 });

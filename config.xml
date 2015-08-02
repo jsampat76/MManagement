@@ -15,5 +15,6 @@
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
+    <gap:plugin name="com.phonegap.plugins.pushplugin" version="2.1.1" />
 
 </widget>

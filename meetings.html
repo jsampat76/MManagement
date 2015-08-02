@@ -41,7 +41,7 @@
                                     <td>{{ meeting.group.name}}</td>
                                     <td>{{ meeting.venue.venue_name}}</td>
                                     <td>{{ meeting.status | uppercase }}</td>
-                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-xs btn-info"><i class="fa fa-group"></i> Join</a></td>
+                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-xs {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View" : "Join" }}</a></td>
                                 </tr>
                             </table>
                         </div>

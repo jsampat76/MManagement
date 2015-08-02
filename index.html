@@ -1,7 +1,48 @@
 <script>
     if (window.localStorage.getItem("id") === null) {
         window.location.href = "login.html";
-    } else {
-        window.location.href = "scheduler.html";
     }
 </script>
+<!DOCTYPE html>
+<html ng-app="iCorpMM">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <title>iCorpMM</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="dist/style.css" />
+        <link rel="stylesheet" href="dist/css/sidebar.css"/>
+    </head>
+
+    <body>
+        <div class="spinner">
+            <div class="ajaxloader"></div>
+        </div>
+        <div id="wrapper" ng-cloak >
+            <div class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate" ng-include="'includes/nav.html'"></div>
+            <div id="page-content-wrapper">
+                <div ng-include="'includes/header.html'"></div>
+                <div class="container-fluid" ng-controller="meetingsController">
+                    <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
+                    <h1>Meetings</h1>
+
+
+                </div>
+            </div>
+        </div>
+        <script src="phonegap.js"></script>
+        <script src="PushNotification.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src='js/angular-sanitize.min.js'></script>
+        <script src="dist/js/sidebar.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/ng-app.js"></script>      
+        <script src="js/myscripts.js"></script>      
+    </body>
+</html>
