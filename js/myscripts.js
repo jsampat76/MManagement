@@ -9,19 +9,25 @@ function progress(e) {
 
 
 $(document).ready(function () {
+    document.addEventListener('deviceready', function () {
+        // Enable to debug issues.
+        // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+        alert("hi");
+        var notificationOpenedCallback = function (jsonData) {
+            console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+        };
 
-    window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+        window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
+                {googleProjectNumber: ""},
+        notificationOpenedCallback);
 
-    var notificationOpenedCallback = function (jsonData) {
-        alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-    };
+        // Show an alert box if a notification comes in when the user is in your app.
+        window.plugins.OneSignal.enableInAppAlertNotification(true);
+    }, false);
 
-    window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
-            {googleProjectNumber: ""},
-    notificationOpenedCallback);
 
-    // Show an alert box if a notification comes in when the user is in your app.
-    window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+
 
 
     if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
