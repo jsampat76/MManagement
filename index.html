@@ -1,10 +1,9 @@
 <script src="phonegap.js"></script>
-
-
 <script>
     document.addEventListener('deviceready', function () {
+        console.log("hi");
         // Enable to debug issues.
-        // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+         window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
         var notificationOpenedCallback = function (jsonData) {
             alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
