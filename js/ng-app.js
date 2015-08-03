@@ -18,6 +18,12 @@ app.filter('base64decode', function () {
     };
 });
 
+app.controller('homeController', function ($scope, $http) {
+
+    $scope.loggedin = window.localStorage.getItem("id") === null ? 0 : 1;
+    $('.spinner').fadeOut(1000);
+});
+
 app.controller('loginController', function ($scope, $http) {
     $('.spinner').fadeOut(1000);
     $scope.checkLogin = function () {

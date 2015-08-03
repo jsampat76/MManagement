@@ -10,9 +10,6 @@ function progress(e) {
 
 $(document).ready(function () {
     document.addEventListener('deviceready', function () {
-        // Enable to debug issues.
-        // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-        alert("hi");
         var notificationOpenedCallback = function (jsonData) {
             console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
         };
@@ -23,6 +20,10 @@ $(document).ready(function () {
 
         // Show an alert box if a notification comes in when the user is in your app.
         window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+        window.plugins.OneSignal.getIds(function (ids) {
+            window.localStorage.setItem("oneSignalId", ids.userId);
+        });
     }, false);
 
 
