@@ -10,6 +10,20 @@ function progress(e) {
 
 $(document).ready(function () {
 
+    window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+    var notificationOpenedCallback = function (jsonData) {
+        alert('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
+
+    window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
+            {googleProjectNumber: ""},
+    notificationOpenedCallback);
+
+    // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+
     if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
         window.localStorage.setItem("toSync", JSON.stringify([]));
     } else {
