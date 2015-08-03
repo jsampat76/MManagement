@@ -22,6 +22,7 @@ $(document).ready(function () {
         window.plugins.OneSignal.enableInAppAlertNotification(true);
 
         window.plugins.OneSignal.getIds(function (ids) {
+            alert(ids.userId);
             window.localStorage.setItem("oneSignalId", ids.userId);
         });
     }, false);
