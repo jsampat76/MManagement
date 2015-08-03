@@ -1,48 +1,18 @@
-var pushNotification;
+document.addEventListener('deviceready', function () {
+    // Enable to debug issues.
+    // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
 
-document.addEventListener("deviceready", function () {
-    pushNotification = window.plugins.pushNotification;
-    pushNotification.register(
-            tokenHandler,
-            errorHandler,
-            {
-                "badge": "true",
-                "sound": "true",
-                "alert": "true",
-                "ecb": "onNotificationAPN"
-            });
+    var notificationOpenedCallback = function (jsonData) {
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
 
-    pushNotification.setApplicationIconBadgeNumber(successCallback, errorCallback, badgeCount);
+    window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
+            {googleProjectNumber: ""},
+    notificationOpenedCallback);
 
-
-
-});
-
-function onNotificationAPN(event) {
-    if (event.alert)
-    {
-        navigator.notification.alert(event.alert);
-    }
-
-    if (event.sound)
-    {
-        var snd = new Media(event.sound);
-        snd.play();
-    }
-
-    if (event.badge)
-    {
-        pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
-    }
-}
-
-function tokenHandler(result) {
-    // Your iOS push server needs to know the token before it can push to this device
-    // here is where you might want to send it the token for later use.
-    alert('device token = ' + result);
-
-
-}
+    // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
+}, false);
 
 function progress(e) {
     if (e.lengthComputable) {
