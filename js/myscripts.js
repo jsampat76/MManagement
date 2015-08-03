@@ -11,6 +11,7 @@ function progress(e) {
 $(document).ready(function () {
     document.addEventListener('deviceready', function () {
         var notificationOpenedCallback = function (jsonData) {
+            alert(JSON.stringify(jsonData));
             console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
         };
 
