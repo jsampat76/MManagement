@@ -23,6 +23,7 @@
                     <h1>Login</h1>
                     <div class="row">
                         <form ng-submit="checkLogin()" name="login">
+                            <input type="hidden" name="playerId" value="{{ playerId }}" />
                             <div class="form-group col-md-12">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" ng-model="email" class="form-control" required>

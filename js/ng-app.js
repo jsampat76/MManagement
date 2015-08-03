@@ -25,6 +25,7 @@ app.controller('homeController', function ($scope, $http) {
 });
 
 app.controller('loginController', function ($scope, $http) {
+    $scope.playerId = window.localStorage.getItem("oneSignalId");
     $('.spinner').fadeOut(1000);
     $scope.checkLogin = function () {
         $('.spinner').fadeIn();
