@@ -156,6 +156,7 @@ app.controller('meetingsController', function ($scope, $http) {
 
 app.controller('joinMeetingController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");
+    $scope.userId = window.localStorage.getItem("id");
     if (navigator.onLine === true) {
         $.ajax({
             url: domain + "get-meeting",
@@ -241,6 +242,17 @@ app.controller('joinMeetingController', function ($scope, $http) {
                     $('#submit').children("i").removeAttr("class");
                     $('#submit').removeAttr("disabled");
                     $('#frmNewAgenda input[type="text"],textarea,input[type="file"]').val("");
+                    window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
+                    $scope.$apply(function () {
+                        $scope.meeting = response;
+
+                        $scope.confirmation = $.grep($scope.meeting.invities, function (e) {
+                            return e.id == window.localStorage.getItem("id");
+                        });
+
+
+                    });
+
 
                 }
             });
@@ -253,5 +265,33 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
         }
     };
+
+    $scope.getComments = function (event, id) {
+        if (navigator.onLine === true) {
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: domain + "get-comments",
+                type: 'GET',
+                data: {id: id, userId: window.localStorage.getItem("id")},
+                success: function (response) {
+                    window.localStorage.setItem("comment_" + id, JSON.stringify(response));
+                    $scope.$apply(function () {
+                        $scope.comments = response;
+                    });
+                    $('#myModal').modal('toggle');
+                    $('a.btn-info').children("i").removeAttr("class");
+                    $('a.btn-info').removeAttr("disabled");
+
+
+                }
+            });
+        } else {
+            $scope.comments = $.parseJSON(window.localStorage.getItem("comment_" + id));
+
+
+        }
+    }
 
 });
