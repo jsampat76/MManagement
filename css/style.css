@@ -548,3 +548,4 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
     margin: -28px 0 0 -25px;
 }
 
+.modal-dialog{   z-index: 999999999; }

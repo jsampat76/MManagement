@@ -134,7 +134,7 @@
                                             <progress class="hide" value="0" max="100"></progress>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <button ng-click="submitAgenda()" name="submit" id="submit" class="btn btn-success btn-xs" ng-disabled="agenda.$invalid"><i></i>Submit</button>
+                                            <button ng-click="submitAgenda()" name="submit" id="submit" class="btn btn-success btn-xs" ng-disabled="agenda.$invalid"><i></i> Submit</button>
 
                                         </div>
 
@@ -151,7 +151,7 @@
                                         <tr ng-repeat="blist in meeting.bucketlist">
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
-                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i>Comment</a></td>
+                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Comment</a></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -159,46 +159,54 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Comments on {{ agendaTitle}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <form name="commentF">
-                                    <textarea name="comment" ng-model="comment" required class="form-control" placeholder="Your Comment"></textarea>
-                                    <button ng-click="comment()" class="btn btn-success btn-xs" ng-disabled="commentF.$invalid"><i></i>Submit</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12" ng-repeat="com in comments">
-                                <div class="popover right">
-                                    <div class="arrow"></div>
-                                    <h3 class="popover-title">{{ com.display_name}}</h3>
-                                    <div class="popover-content">
-                                        <p>{{ com.pivot.comment}}</p>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Comments on {{ agendaTitle}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form name="commentF">
+                                                <div class="col-md-12 form-group">
+                                                    <input type="hidden" name="aId" value="{{ aId}}" />
+                                                    <input type="hidden" name="uId" value="{{ uId}}" />
+                                                    <textarea name="comment" ng-model="commentt" required class="form-control" placeholder="Your Comment"></textarea>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <button ng-click="comment()" id="submitC" class="btn btn-success btn-xs" ng-disabled="commentF.$invalid"><i></i> Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="panel panel-default" ng-repeat="comm in comments">
+                                            <div class="panel-heading panel-danger">
+                                                <h3 class="panel-title">{{ comm.display_name}}</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                {{ comm.pivot.comment}}
+                                            </div>
+                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented | convertToDate | date:'dd, MMMM yyyy' }}</div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
                 </div>
             </div>
         </div>
+
         <script src="phonegap.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

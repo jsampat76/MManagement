@@ -7,11 +7,13 @@ app.filter('convertToDate', function () {
         return new Date(str);
     };
 });
+
 app.filter('unsafe', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
     };
 });
+
 app.filter('base64decode', function () {
     return function (str) {
         return atob(str);
@@ -156,7 +158,9 @@ app.controller('meetingsController', function ($scope, $http) {
 
 app.controller('joinMeetingController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");
+
     $scope.userId = window.localStorage.getItem("id");
+
     if (navigator.onLine === true) {
         $.ajax({
             url: domain + "get-meeting",
@@ -183,7 +187,6 @@ app.controller('joinMeetingController', function ($scope, $http) {
         });
         $('.spinner').fadeOut(1000);
     }
-
 
     $scope.attend = function (event, id, attending) {
         var url = domain + "meeting-confirm";
@@ -266,7 +269,11 @@ app.controller('joinMeetingController', function ($scope, $http) {
         }
     };
 
-    $scope.getComments = function (event, id) {
+    $scope.getComments = function (event, id, title) {
+        $scope.agendaTitle = title;
+        $scope.aId = id;
+        $scope.uId = window.localStorage.getItem("id");
+
         if (navigator.onLine === true) {
             angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
             angular.element(event.target).prop("disabled", "disabled");
@@ -279,6 +286,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                     window.localStorage.setItem("comment_" + id, JSON.stringify(response));
                     $scope.$apply(function () {
                         $scope.comments = response;
+
                     });
                     $('#myModal').modal('toggle');
                     $('a.btn-info').children("i").removeAttr("class");
@@ -290,6 +298,46 @@ app.controller('joinMeetingController', function ($scope, $http) {
         } else {
             $scope.comments = $.parseJSON(window.localStorage.getItem("comment_" + id));
 
+
+        }
+    };
+
+    $scope.comment = function () {
+        var data = $('[name="commentF"]').serialize();
+
+        var url = domain + "comment";
+
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#submitC').children("i").removeAttr("class");
+                    $('#submitC').removeAttr("disabled");
+                    $('#frmNewAgenda input[type="text"],textarea,input[type="file"]').val("");
+                    window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
+                    $scope.$apply(function () {
+                        $scope.comments = response;
+
+                    });
+
+
+                }
+            });
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().parent().append('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
 
         }
     }
