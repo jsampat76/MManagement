@@ -303,7 +303,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
     };
 
     $scope.comment = function () {
-        var data = $('[name="commentF"]').serialize();
+        var data = new FormData($('[name="commentF"]')[0]);
 
         var url = domain + "comment";
 
@@ -340,6 +340,40 @@ app.controller('joinMeetingController', function ($scope, $http) {
             angular.element(event.target).parent().parent().append('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
 
         }
-    }
+    };
+
+
+    $scope.vote = function (event, id, title, vote) {
+        var data = {id: id, userId: window.localStorage.getItem("id"), vote: vote};
+
+        var url = domain + "vote";
+
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+
+
+
+                }
+            });
+            angular.element(event.target).parent().html("Voted!");
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
 
 });
