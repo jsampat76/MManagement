@@ -46,6 +46,8 @@ app.controller('loginController', function ($scope, $http) {
                     window.localStorage.setItem("userLname", response.lastname);
                     window.localStorage.setItem("userDname", response.display_name);
                     window.localStorage.setItem("userEmail", response.email);
+                    window.localStorage.setItem("userDesgn", response.designation);
+                    window.localStorage.setItem("isDirector", response.designation.toLowerCase().indexOf("director") > -1 ? 1 : 0);
                     window.localStorage.setItem("userPassword", $scope.password);
                     window.location.href = "scheduler.html";
                 }
@@ -158,6 +160,8 @@ app.controller('meetingsController', function ($scope, $http) {
 
 app.controller('joinMeetingController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");
+
+    $scope.director = window.localStorage.getItem("isDirector");
 
     $scope.userId = window.localStorage.getItem("id");
 
@@ -322,8 +326,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                 success: function (response) {
                     $('#submitC').children("i").removeAttr("class");
                     $('#submitC').removeAttr("disabled");
-                    $('#frmNewAgenda input[type="text"],textarea,input[type="file"]').val("");
-                    window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
+                    $('[nme="commentF"] input[type="text"],textarea,input[type="file"]').val("");
                     $scope.$apply(function () {
                         $scope.comments = response;
 
@@ -341,7 +344,6 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
         }
     };
-
 
     $scope.vote = function (event, id, title, vote) {
         var data = {id: id, userId: window.localStorage.getItem("id"), vote: vote};
@@ -375,5 +377,80 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
         }
     };
+
+    $scope.getDNotes = function (event, id, title) {
+        $scope.agendaTitle = title;
+        $scope.aId = id;
+        $scope.uId = window.localStorage.getItem("id");
+
+        if (navigator.onLine === true) {
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: domain + "get-notes",
+                type: 'GET',
+                data: {id: id, userId: window.localStorage.getItem("id")},
+                success: function (response) {
+                    window.localStorage.setItem("note_" + id, JSON.stringify(response));
+                    $scope.$apply(function () {
+                        $scope.notes = response;
+
+                    });
+                    $('#myModal2').modal('toggle');
+                    $('a.btn-info').children("i").removeAttr("class");
+                    $('a.btn-info').removeAttr("disabled");
+
+
+                }
+            });
+        } else {
+            $scope.notes = $.parseJSON(window.localStorage.getItem("note_" + id));
+
+
+        }
+    };
+
+
+    $scope.note = function () {
+        var data = new FormData($('[name="noteF"]')[0]);
+
+        var url = domain + "note";
+
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#submitN').children("i").removeAttr("class");
+                    $('#submitN').removeAttr("disabled");
+                    $('[name="noteF"] input[type="text"],textarea,input[type="file"]').val("");
+                    $scope.$apply(function () {
+                        $scope.notes = response;
+
+                    });
+
+
+                }
+            });
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().parent().append('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
+
+
 
 });

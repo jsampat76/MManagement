@@ -94,15 +94,18 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Body</th>
-                                            <th>Vote</th>
+                                            <th ng-if="meeting.status != 'Scheduled'">Vote</th>
                                             <th>Comment</th>
+                                            <th ng-if="director == 1">Director's Note</th>
                                         </tr>
                                         <tr ng-repeat="blist in meeting.agenda">
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
-                                            <td ng-if="!blist.votes.length"><a href="#" class="btn btn-xs btn-success" ng-click="vote($event, blist.id, blist.title, 1)"><i></i> Positive</a> <a href="#" class="btn btn-xs btn-danger" ng-click="vote($event, blist.id, blist.title, 2)"><i></i> Negative</a> <a href="#" ng-click="vote($event, blist.id, blist.title, 3)" class="btn btn-xs btn-warning"><i></i> Neutral</a></td>
-                                            <td ng-if="blist.votes.length"> You have voted {{ blist["votes"][0]["pivot"]["vote"] == 1 ? "Positive" : (blist["votes"][0]["pivot"]["vote"] == 2 ? "Negative" : "Neutral") }}</td>
+                                            <td ng-if="!blist.votes.length && meeting.status != 'Scheduled'"><a href="#" class="btn btn-xs btn-success" ng-click="vote($event, blist.id, blist.title, 1)"><i></i> Yes</a> <a href="#" class="btn btn-xs btn-danger" ng-click="vote($event, blist.id, blist.title, 2)"><i></i> No</a> <a href="#" ng-click="vote($event, blist.id, blist.title, 3)" class="btn btn-xs btn-warning"><i></i> Abstain</a></td>
+                                            <td ng-if="blist.votes.length && meeting.status != 'Scheduled'"> You have voted {{ blist["votes"][0]["pivot"]["vote"] == 1 ? "Yes" : (blist["votes"][0]["pivot"]["vote"] == 2 ? "No" : "Abstain") }}</td>
                                             <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Comment</a></td>
+                                            <td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
+
                                         </tr>
                                     </table>
                                 </div>
@@ -152,11 +155,15 @@
                                             <th>Title</th>
                                             <th>Body</th>
                                             <th>Comment</th>
+                                            <th ng-if="director == 1">Director's Note</th>
+
                                         </tr>
                                         <tr ng-repeat="blist in meeting.bucketlist">
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Comment</a></td>
+                                            <td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
+
                                         </tr>
                                     </table>
                                 </div>
@@ -207,6 +214,52 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Director's Note on "{{ agendaTitle}}"</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form name="noteF">
+                                                <div class="col-md-12 form-group">
+                                                    <input type="hidden" name="aId" value="{{ aId}}" />
+                                                    <input type="hidden" name="uId" value="{{ uId}}" />
+                                                    <textarea name="comment" ng-model="commentt" required class="form-control" placeholder="Your Comment"></textarea>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <button ng-click="note()" id="submitN" class="btn btn-success btn-xs" ng-disabled="commentF.$invalid"><i></i> Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="panel panel-default" ng-repeat="comm in notes">
+                                            <div class="panel-heading panel-danger">
+                                                <h3 class="panel-title">{{ comm.display_name}}</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                {{ comm.pivot.comment}}
+                                            </div>
+                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented | convertToDate | date:'dd, MMMM yyyy' }}</div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
