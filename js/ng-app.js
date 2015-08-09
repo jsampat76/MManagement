@@ -513,3 +513,30 @@ app.controller('rbcController', function ($scope, $http) {
     };
 
 });
+
+app.controller('profileController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+
+    $scope.director = window.localStorage.getItem("isDirector");
+
+    $scope.userId = window.localStorage.getItem("id");
+
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "profile",
+            type: 'GET',
+            data: {userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("udetails", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.udetails = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.udetails = $.parseJSON(window.localStorage.getItem("udetails"));
+        $('.spinner').fadeOut(1000);
+    }
+
+});
