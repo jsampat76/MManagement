@@ -454,3 +454,62 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
 });
+
+app.controller('rbcController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+
+    $scope.director = window.localStorage.getItem("isDirector");
+
+    $scope.userId = window.localStorage.getItem("id");
+
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "rbc",
+            type: 'GET',
+            data: {userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("rbc", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.rbc = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.rbc = $.parseJSON(window.localStorage.getItem("rbc"));
+        $('.spinner').fadeOut(1000);
+    }
+    $scope.vote = function (event, id, title, vote) {
+        var data = {id: id, userId: window.localStorage.getItem("id"), vote: vote};
+
+        var url = domain + "vote-rbc";
+
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+
+
+
+                }
+            });
+            angular.element(event.target).parent().html("Voted!");
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }
+    };
+
+});
