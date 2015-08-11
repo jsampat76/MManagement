@@ -46,7 +46,10 @@ $(document).ready(function () {
         }
     }
 
-
+    $("#dob").datepicker({dateFormat: 'yy-mm-dd'});
+    $("#date_ofowner").datepicker({dateFormat: 'yy-mm-dd'});
+    $("[name='passport_issuedate']").datepicker({dateFormat: 'yy-mm-dd'});
+    $("[name='passport_expirydate']").datepicker({dateFormat: 'yy-mm-dd'});
 
     $("body").on("click", "#accordion li.parent", function () {
         if (false === $(this).children("ul").is(':visible')) {

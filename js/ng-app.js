@@ -529,14 +529,187 @@ app.controller('profileController', function ($scope, $http) {
             success: function (response) {
                 window.localStorage.setItem("udetails", JSON.stringify(response));
                 $scope.$apply(function () {
-                    $scope.udetails = response;
+                    $scope.pdetails = response;
                 });
                 $('.spinner').fadeOut(1000);
             }
         });
+
+        $.ajax({
+            url: domain + "lprofile",
+            type: 'GET',
+            data: {userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("ldetails", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.ldetails = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+
+        $.ajax({
+            url: domain + "disc",
+            type: 'GET',
+            data: {userId: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("disc", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.disc = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+
     } else {
-        $scope.udetails = $.parseJSON(window.localStorage.getItem("udetails"));
+        $scope.pdetails = $.parseJSON(window.localStorage.getItem("udetails"));
+        $scope.ldetails = $.parseJSON(window.localStorage.getItem("ldetails"));
+        $scope.disc = $.parseJSON(window.localStorage.getItem("disc"));
         $('.spinner').fadeOut(1000);
+    }
+
+
+    $scope.copyPAddress = function () {
+        $scope.pdetails.c_street1 = $scope.pdetails.p_street1;
+        $scope.pdetails.c_street2 = $scope.pdetails.p_street2;
+        $scope.pdetails.c_city = $scope.pdetails.p_city;
+        $scope.pdetails.c_zipcode = $scope.pdetails.p_zipcode;
+        $scope.pdetails.c_state = $scope.pdetails.p_state;
+        $scope.pdetails.c_country = $scope.pdetails.p_country;
+    };
+
+    $scope.submit = function () {
+
+
+        var data = $scope.pdetails;
+
+        var url = domain + "profile-update";
+
+        if (navigator.onLine === true) {
+
+            $("#psubmit").children("i").attr("class", "fa fa-spinner fa-pulse");
+            $("#psubmit").prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+
+
+
+                }
+            });
+            $("#psubmit").children("i").removeAttr("class");
+            $("#psubmit").removeAttr("disabled");
+
+        } else {
+
+            toSync(url, data);
+
+        }
+    };
+
+    $scope.lsubmit = function () {
+        var data = $scope.ldetails;
+
+        var url = domain + "lprofile-update";
+
+        if (navigator.onLine === true) {
+
+            $("#lsubmit").children("i").attr("class", "fa fa-spinner fa-pulse");
+            $("#lsubmit").prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+
+
+
+                }
+            });
+            $("#lsubmit").children("i").removeAttr("class");
+            $("#lsubmit").removeAttr("disabled");
+
+        } else {
+
+            toSync(url, data);
+
+        }
+    };
+
+    $scope.addD = function () {
+        var data = $("#frmNewParty").serialize();
+
+        var url = domain + "disc-add";
+
+        if (navigator.onLine === true) {
+
+            $("#dsubmit").children("i").attr("class", "fa fa-spinner fa-pulse");
+            $("#dsubmit").prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+                    $scope.$apply(function () {
+                        $scope.disc = response;
+                    });
+
+                    $("#frmNewParty [type='text']").val("");
+
+                }
+            });
+            $("#dsubmit").children("i").removeAttr("class");
+            $("#dsubmit").removeAttr("disabled");
+
+        } else {
+            $("#frmNewParty [type='text']").val("");
+            toSync(url, data);
+
+        }
+    };
+    
+    $scope.unint = function(event,id){
+       var data = {id: id};
+
+        var url = domain + "unint";
+
+        if (navigator.onLine === true) {
+
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: data,
+                cache: false,
+                success: function (response) {
+
+
+
+
+                }
+            });
+            angular.element(event.target).parent().html("Resigned!");
+
+        } else {
+
+            //    angular.element(event.target).append("i").attr("class", "fa fa-spinner fa-pulse");
+            toSync(url, data);
+            angular.element(event.target).parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
+
+        }  
     }
 
 });
