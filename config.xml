@@ -15,7 +15,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
-    <gap:plugin name="pushwoosh-cordova-plugin" source="npm" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.2" />
 
     <access origin="*"/> <!-- allow all pages, use for development -->
     <access origin="*.pushwoosh.com"/> <!-- allow pushwoosh service -->
