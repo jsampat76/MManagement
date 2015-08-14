@@ -1,4 +1,4 @@
-var domain = "http://www.boxcommerce.in/icorpmm/";
+var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
 
