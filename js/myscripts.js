@@ -87,7 +87,7 @@ function initPushwoosh() {
         var notification = event.notification;
 
         //display alert to the user for example
-        alert(notification.aps.alert);
+       
 
         //clear the app badge
         pushNotification.setApplicationIconBadgeNumber(0);
@@ -104,7 +104,7 @@ function initPushwoosh() {
             },
             function (status) {
                 console.warn('failed to register : ' + JSON.stringify(status));
-                alert(JSON.stringify(['failed to register ', status]));
+               // alert(JSON.stringify(['failed to register ', status]));
             }
     );
 

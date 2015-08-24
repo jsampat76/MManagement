@@ -3,7 +3,6 @@
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://5u5hil.wordpress.com" email="sushil.sud@gmail.com">Sushil Sudhakaran</author>
     <preference name="phonegap-version" value="cli-5.1.1" />
-    <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="false" />
     <preference name="permissions" value="none"/>
     <preference name="webviewbounce" value="true" />
