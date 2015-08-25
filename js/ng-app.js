@@ -678,9 +678,9 @@ app.controller('profileController', function ($scope, $http) {
 
         }
     };
-    
-    $scope.unint = function(event,id){
-       var data = {id: id};
+
+    $scope.unint = function (event, id) {
+        var data = {id: id};
 
         var url = domain + "unint";
 
@@ -709,7 +709,28 @@ app.controller('profileController', function ($scope, $http) {
             toSync(url, data);
             angular.element(event.target).parent().html('<span class="text-info">You\'re not connected to the Internet at the moment! Your selection has been recorded and will be synced after you connect to the internet! </span>');
 
-        }  
+        }
     }
 
+});
+
+app.controller('archiveController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "archive",
+            type: 'GET',
+            data: {id: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("archive", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.meetings = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.meetings = $.parseJSON(window.localStorage.getItem("archive"));
+        $('.spinner').fadeOut(1000);
+    }
 });
