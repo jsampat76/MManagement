@@ -158,9 +158,8 @@ app.controller('meetingsController', function ($scope, $http) {
     }
 
     $scope.addToCalendar = function (title, location, date) {
-        var startDate = new Date(date);
-        var endDate = new Date(date);
-
+        var startDate = new Date("17, Sep 2015 10:15:00 pm");
+        var endDate = "";
         var notes = "";
         var success = function (message) {
             alert("Success: " + JSON.stringify(message));
