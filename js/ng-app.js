@@ -156,6 +156,21 @@ app.controller('meetingsController', function ($scope, $http) {
         $scope.meetings = $.parseJSON(window.localStorage.getItem("meetings"));
         $('.spinner').fadeOut(1000);
     }
+
+    $scope.addToCalendar = function (title, location, date) {
+        var startDate = new Date(date);
+        var endDate = new Date(date);
+
+        var notes = "";
+        var success = function (message) {
+            alert("Success: " + JSON.stringify(message));
+        };
+        var error = function (message) {
+            alert("Error: " + message);
+        };
+        window.plugins.calendar.createEvent(title, location, notes, startDate, endDate, success, error);
+
+    }
 });
 
 app.controller('joinMeetingController', function ($scope, $http) {

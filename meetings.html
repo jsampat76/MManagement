@@ -30,14 +30,14 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Date/Time</th>
-                                   <!-- <th>For</th>
-                                    <th>Venue</th>-->
+                                    <!-- <th>For</th>
+                                     <th>Venue</th>-->
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
                                     <td>{{ meeting.title}}<br>{{ meeting.venue.venue_name}}</td>
-                                    <td>{{ meeting.datetime_ofmeeting}}</td>
+                                    <td><a href="#" ng-click="addToCalendar(meeting.title, meeting.venue.venue_name, meeting.datetime_ofmeeting)">{{ meeting.datetime_ofmeeting}}</a></td>
                                     <!--<td>{{ meeting.group.name}}</td>
                                     <td></td>-->
                                     <td>{{ meeting.status | uppercase }}</td>
@@ -50,6 +50,7 @@
             </div>
         </div>
         <script src="phonegap.js"></script>
+        <script src="js/plugins/Calendar.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>
