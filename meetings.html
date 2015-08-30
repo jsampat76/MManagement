@@ -30,18 +30,18 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Date/Time</th>
-                                    <th>For</th>
-                                    <th>Venue</th>
+                                   <!-- <th>For</th>
+                                    <th>Venue</th>-->
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
-                                    <td>{{ meeting.title}}</td>
+                                    <td>{{ meeting.title}}<br>{{ meeting.venue.venue_name}}</td>
                                     <td>{{ meeting.datetime_ofmeeting}}</td>
-                                    <td>{{ meeting.group.name}}</td>
-                                    <td>{{ meeting.venue.venue_name}}</td>
+                                    <!--<td>{{ meeting.group.name}}</td>
+                                    <td></td>-->
                                     <td>{{ meeting.status | uppercase }}</td>
-                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-xs {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View" : "Join" }}</a></td>
+                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-sm {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View" : "Join" }}</a></td>
                                 </tr>
                             </table>
                         </div>

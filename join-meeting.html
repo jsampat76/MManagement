@@ -23,38 +23,9 @@
                 <div class="container-fluid" ng-controller="joinMeetingController">
                     <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
                     <h1>{{ meeting.title}}</h1>
-                    <p class="">{{meeting.purpose}}</p>
-                    <div class="row">
-                        <div class="col-md-12 mt10">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="text-info col-md-3 col-sm-3">Meeting Date Time</div>
-                                <div>{{ meeting.datetime_ofmeeting}}</div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="text-info col-md-3 col-sm-3">Meeting For</div>
-                                <div>{{ meeting.group.name}}</div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt10 mb10">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="text-info col-md-3 col-sm-3">Venue</div>
-                                <div>{{ meeting.venue.venue_name}}</div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="text-info col-md-3 col-sm-3">Venue Address</div>
-                                <div>{{ meeting.venue.address}}</div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mt10 mb10 cbox" ng-show="confirmation[0].pivot.vote == null" >
-                            Confirm your Attendance <span ><a href="#" ng-click="attend($event, meeting.id, 1)" class="btn btn-xs btn-success" ><i class="fa fa-check"></i> Yes</a> <a href="#" ng-click="attend($event, meeting.id, 2)" class="btn btn-xs btn-danger" ><i class="fa fa-ban"></i> No</a></span>
-                        </div>
-                        <div class="col-md-12 mt10 mb10 attending" ng-show="confirmation[0].pivot.vote == 1" >
-                            <a href="#" class="btn btn-xs btn-success"> Acknowledged the receipt of the notice. Yes, confirmed attendance. </a>   
-                        </div>
-                        <div class="col-md-12 mt10 mb10 nattending" ng-show="confirmation[0].pivot.vote == 2" >
-                            <a href="#" class="btn btn-xs btn-danger"> Acknowledged the receipt of the notice. Not Attending, please grant leave. </a>   
-                        </div>
-                    </div>
+                    <div>{{ meeting.datetime_ofmeeting}}</div>
+                  <!--  <p class="">{{meeting.purpose}}</p>-->
+                    
 
                     <div class="row mt10">
                         <ul class="nav nav-tabs" role="tablist">
@@ -171,6 +142,48 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    
+                    <div class="row">
+                       
+                       
+                      <!-- <div class="col-md-12 mt10">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="text-info col-md-3 col-sm-3">Meeting Date Time</div>
+                                <div>{{ meeting.datetime_ofmeeting}}</div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="text-info col-md-3 col-sm-3">Meeting For</div>
+                                <div>{{ meeting.group.name}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt10 mb10">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="text-info col-md-3 col-sm-3">Venue</div>
+                                <div>{{ meeting.venue.venue_name}}</div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="text-info col-md-3 col-sm-3">Venue Address</div>
+                                <div>{{ meeting.venue.address}}</div>
+                            </div>
+                        </div>-->
+                        
+                        
+                        <div class="col-md-12 mt10 mb10 cbox" ng-show="confirmation[0].pivot.vote == null" >
+                            Confirm your Attendance <span ><a href="#" ng-click="attend($event, meeting.id, 1)" class="btn btn-xs btn-success" ><i class="fa fa-check"></i> Yes</a> <a href="#" ng-click="attend($event, meeting.id, 2)" class="btn btn-xs btn-danger" ><i class="fa fa-ban"></i> No</a></span>
+                        </div>
+                        <div class="col-md-12 mt10 mb10 attending" ng-show="confirmation[0].pivot.vote == 1" >
+                            <a href="#" class="btn btn-xs btn-success"> Acknowledged the receipt of the notice. Yes, confirmed attendance. </a>   
+                        </div>
+                        <div class="col-md-12 mt10 mb10 nattending" ng-show="confirmation[0].pivot.vote == 2" >
+                            <a href="#" class="btn btn-xs btn-danger"> Acknowledged the receipt of the notice. Not Attending, please grant leave. </a>   
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

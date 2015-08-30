@@ -1,9 +1,13 @@
-body{ background-color: #FAFBFB; }
-.logo{
-
-    margin-top:-2px;
+body {
+  padding-top: 100px;
 }
 
+.icons { float:right; text-align:center; padding:0; margin:0;}
+.icons a { text-align:center; margin:0 5px;}
+h1 { color:#dd4814;}
+
+
+.logo{ text-align:left; float:left; margin:0;}
 
 .navcart {
     margin-top: 9px;
@@ -30,7 +34,7 @@ input::-webkit-inner-spin-button {
 }
 
 div#myTabContent {
-    border: 1px solid #ccc;
+    border: 1px solid #666;
     border-top: none;
     padding: 8px;
     border-bottom-left-radius: 5px;
@@ -184,7 +188,7 @@ button#menu-toggle {
 }
 select.input-sm{height:30px; line-height: 30px;}
 .h4, .h5, .h6, h4, h5, h6{margin-top:5px; margin-bottom: 8px;}
-.container-fluid{padding-left: 7px; padding-right: 7px; }
+.container-fluid{ padding:0 10px;}
 h2{font-size:18px; margin: 7px 0px;}
 p {
     margin: 0 0 5px;
@@ -201,7 +205,7 @@ p {
 .qtyinput{height:30px; }
 .h30{  line-height: 22px;}
 .tab-content{font-size:12px;}
-.nav>li>a{padding:5px 10px; font-size: 12px;}
+.nav>li>a{padding:10px 20px; font-size: 20px; font-weight:400;}
 .h84{height:84px;}
 .mt30{margin-top:30px;}
 .mt0{margin-top:0;}
@@ -361,7 +365,7 @@ p {
 }
 
 .inline{ display: inline-block; vertical-align: top;}
-.custom-navbar-brand{ padding:  6px 15px 15px 0px !important; }
+.custom-navbar-brand{ padding: 15px 0!important; }
 .custom-heading-order{ /* height: 40px; */
     background-color: #1B4E9B;
     padding: 3px 0px;
@@ -438,7 +442,7 @@ p {
 
 #cart-cart{margin-right:15px !important;}
 .hiconcontainer{float:right;}
-.container-fluid>.navbar-header{width:100%;}
+.container-fluid>.navbar-header{width:100%; text-align:center; padding:10px 0;}
 .hiconcontainer a i{ font-size:16px;}
 .hiconcontainer a i.f20px{font-size:20px;}
 
@@ -469,11 +473,12 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
 
 #offerimg section.container{  padding-right: 0 !important;
                               padding-left: 0 !important;}	
+.clear{padding:0; margin:0; clear:both;}						  
 .clearfix{padding:0; margin:0; clear:both;}
 
 @media (max-width: 767px)
 {
-    .custom-container-fluid { padding: 0px 16px;}
+    .custom-container-fluid { padding: 0px 10px;}
     #menu-toggle {
         margin-right: 10px;
         margin-left: 15px;

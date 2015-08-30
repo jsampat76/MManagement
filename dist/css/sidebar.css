@@ -8,8 +8,8 @@
 } 
 .sidebar {
   padding: 20px;
-  background-color: #00193B;
-  border-right: 1px solid #eee;
+  background-color: #ce3500;
+  border-right: 1px solid #ce3500;
   padding-left: 0px;
 }
 
@@ -36,7 +36,7 @@
 .sidebar {
     position: fixed;
     display: block;
-    top: 45px;
+    top: 70px;
     bottom: 0;
     z-index: 1000;
     min-height: 80%;
