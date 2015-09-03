@@ -22,7 +22,7 @@
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="joinMeetingController">
                     <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
-                    <h1>{{ meeting.title}}</h1>
+                    <h1>{{ meeting.title }} <span ng-if="meeting.status == 'inprogress'">(In Progress)</span></h1>
                     <div>{{ meeting.datetime_ofmeeting}}</div>
                   <!--  <p class="">{{meeting.purpose}}</p>-->
                     
@@ -30,7 +30,7 @@
                     <div class="row mt10">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#desc" data-toggle="tab">Notice</a></li>
-                            <li><a href="#ben" data-toggle="tab">Invities</a></li>
+                            <li><a href="#ben" data-toggle="tab">Invited Members</a></li>
                             <li><a href="#res" data-toggle="tab">Agendas</a></li>
                             <li ng-if="meeting.status == 'Scheduled'"><a href="#blist" data-toggle="tab">Bucket List</a></li>
                         </ul>
@@ -52,8 +52,8 @@
                                             <td>{{ invitee.designation}}</td>
                                             <td>
                                                 <span ng-if="invitee.pivot.vote == null"><i class="fa fa-minus"></i></span>
-                                                <span ng-if="invitee.pivot.vote == 1" class="text-success"><i class="fa fa-check"></i> Attending</span>
-                                                <span ng-if="invitee.pivot.vote == 2" class="text-danger"><i class="fa fa-ban"></i> Not Attending</span>
+                                                <span ng-if="invitee.pivot.vote == 1" class="text-success"><i class="fa fa-check"></i> Yes, will Attend</span>
+                                                <span ng-if="invitee.pivot.vote == 2" class="text-danger"><i class="fa fa-ban"></i> No, will not Attend</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -174,7 +174,7 @@
                             Confirm your Attendance <span ><a href="#" ng-click="attend($event, meeting.id, 1)" class="btn btn-xs btn-success" ><i class="fa fa-check"></i> Yes</a> <a href="#" ng-click="attend($event, meeting.id, 2)" class="btn btn-xs btn-danger" ><i class="fa fa-ban"></i> No</a></span>
                         </div>
                         <div class="col-md-12 mt10 mb10 attending" ng-show="confirmation[0].pivot.vote == 1" >
-                            <a href="#" class="btn btn-xs btn-success"> Acknowledged the receipt of the notice. Yes, confirmed attendance. </a>   
+                            <a href="#" class="btn btn-xs btn-success"> Acknowledged the receipt of the notice. Yes, will attend the meeting. </a>   
                         </div>
                         <div class="col-md-12 mt10 mb10 nattending" ng-show="confirmation[0].pivot.vote == 2" >
                             <a href="#" class="btn btn-xs btn-danger"> Acknowledged the receipt of the notice. Not Attending, please grant leave. </a>   

@@ -22,7 +22,7 @@
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="meetingsController">
                     <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
-                    <h1>Meetings</h1>
+                    <h1>Scheduled Meetings</h1>
 
                     <div class="row">
                         <div class="table-responsive">
@@ -30,18 +30,12 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Date/Time</th>
-                                    <!-- <th>For</th>
-                                     <th>Venue</th>-->
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
                                     <td>{{ meeting.title}}<br>{{ meeting.venue.venue_name}}</td>
                                     <td><a href="#" ng-click="addToCalendar(meeting.title, meeting.venue.venue_name, meeting.datetime_ofmeeting)">{{ meeting.datetime_ofmeeting}}</a></td>
-                                    <!--<td>{{ meeting.group.name}}</td>
-                                    <td></td>-->
-                                    <td>{{ meeting.status | uppercase }}</td>
-                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-sm {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View" : "Join" }}</a></td>
+                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-sm {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View Scheduled Meeting" : "Join the Meeting" }}</a></td>
                                 </tr>
                             </table>
                         </div>

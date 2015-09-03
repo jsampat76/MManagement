@@ -28,14 +28,16 @@
                             <table class="table table-striped">
                                 <tr>
                                     <th>Title</th>
+                                    <th>Date</th>
                                     <th>Body</th>
                                     <th>Vote</th>
                                 </tr>
                                 <tr ng-repeat="blist in rbc">
                                     <td>{{ blist.title}}</td>
+                                    <td>{{ blist.created_datetime}}</td>
                                     <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                     <td ng-if='blist["invities"][0]["pivot"]["vote"] == null'><a href="#" class="btn btn-xs btn-success" ng-click="vote($event, blist.id, blist.title, 1)"><i></i> Yes</a> <a href="#" class="btn btn-xs btn-danger" ng-click="vote($event, blist.id, blist.title, 2)"><i></i> No</a> <a href="#" ng-click="vote($event, blist.id, blist.title, 3)" class="btn btn-xs btn-warning"><i></i> Abstained</a></td>
-                                    <td ng-if='blist["invities"][0]["pivot"]["vote"] != null'> You have voted {{ blist["invities"][0]["pivot"]["vote"] == 1 ? "Yes" : (blist["invities"][0]["pivot"]["vote"] == 2 ? "No" : "Abstained") }}</td>
+                                    <td ng-if='blist["invities"][0]["pivot"]["vote"] != null'> {{ blist["invities"][0]["pivot"]["vote"] == 1 ? "Yes, Approved" : (blist["invities"][0]["pivot"]["vote"] == 2 ? "No, Disapproved" : "You Abstained") }}</td>
                                 </tr>
                             </table>
                         </div>

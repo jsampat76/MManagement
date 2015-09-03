@@ -22,7 +22,7 @@
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="archiveController">
                     <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
-                    <h1>Meetings</h1>
+                    <h1>Archived Meetings</h1>
 
                     <div class="row">
                         <div class="table-responsive">
@@ -32,7 +32,6 @@
                                     <th>Date/Time</th>
                                     <th>For</th>
                                     <th>Venue</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
@@ -40,7 +39,6 @@
                                     <td>{{ meeting.datetime_ofmeeting}}</td>
                                     <td>{{ meeting.group.name}}</td>
                                     <td>{{ meeting.venue.venue_name}}</td>
-                                    <td>{{ meeting.status | uppercase }}</td>
                                     <td><a href="view-meeting.html?id={{meeting.id}}" class="btn btn-xs btn-success"><i class="fa fa-eye"></i> View</a></td>
                                 </tr>
                             </table>
