@@ -11,13 +11,7 @@ function progress(e) {
 $(document).ready(function () {
     
     
-    if(window.localStorage.getItem("isDirector") != 1 ){
-        $(".rbc").hide();
-    }
     
-    if(window.localStorage.getItem("id") == null){
-        $(".menuu").hide();
-    }
     
     document.addEventListener('deviceready', function () {
         initPushwoosh();

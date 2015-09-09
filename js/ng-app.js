@@ -21,12 +21,25 @@ app.filter('base64decode', function () {
 });
 
 app.controller('homeController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
 
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.loggedin = window.localStorage.getItem("id") === null ? 0 : 1;
     $('.spinner').fadeOut(1000);
 });
 
 app.controller('loginController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.playerId = window.localStorage.getItem("oneSignalId");
     $('.spinner').fadeOut(1000);
     $scope.checkLogin = function () {
@@ -58,6 +71,13 @@ app.controller('loginController', function ($scope, $http) {
 });
 
 app.controller('schedulerController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
     if (navigator.onLine === true) {
         $.ajax({
@@ -84,6 +104,13 @@ app.controller('schedulerController', function ($scope, $http) {
 });
 
 app.controller('confirmTimingsController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
     if (navigator.onLine === true) {
         $.ajax({
@@ -138,6 +165,13 @@ app.controller('confirmTimingsController', function ($scope, $http) {
 });
 
 app.controller('meetingsController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
     if (navigator.onLine === true) {
         $.ajax({
@@ -173,6 +207,13 @@ app.controller('meetingsController', function ($scope, $http) {
 });
 
 app.controller('joinMeetingController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
 
     $scope.director = window.localStorage.getItem("isDirector");
@@ -470,6 +511,13 @@ app.controller('joinMeetingController', function ($scope, $http) {
 });
 
 app.controller('rbcController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
 
     $scope.director = window.localStorage.getItem("isDirector");
@@ -529,6 +577,13 @@ app.controller('rbcController', function ($scope, $http) {
 });
 
 app.controller('profileController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
 
     $scope.director = window.localStorage.getItem("isDirector");
@@ -729,6 +784,13 @@ app.controller('profileController', function ($scope, $http) {
 });
 
 app.controller('archiveController', function ($scope, $http) {
+    if (window.localStorage.getItem("isDirector") != 1) {
+        $(".rbc").hide();
+    }
+
+    if (window.localStorage.getItem("id") == null) {
+        $(".menuu").hide();
+    }
     $scope.user = window.localStorage.getItem("userDname");
     if (navigator.onLine === true) {
         $.ajax({
