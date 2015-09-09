@@ -15,7 +15,7 @@ $(document).ready(function () {
         $("li.rbc").hide();
     }
     
-    if(!window.localStorage.getItem("id")){
+    if(window.localStorage.getItem("id") == null){
         $("ul.sidebar-nav").hide();
     }
     
