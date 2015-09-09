@@ -17,13 +17,12 @@
             <div class="ajaxloader"></div>
         </div>
         <div id="wrapper" ng-cloak ng-controller="homeController" >
-            <div ng-if="loggedin == 1" class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate" ng-include="'includes/nav.html'"></div>
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="schedulerController">
                     <h2 class="text-center">Welcome to iCorp's</h2>
                     <h1 class="text-center">Meeting Management System</h1>
-                    
+
                     <p class="text-center" ng-if="loggedin != 1" >Please connect to wifi for the first time and <a href="login.html">Login</a> with your password!</p>
 
                 </div>
