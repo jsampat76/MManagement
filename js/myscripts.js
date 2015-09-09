@@ -12,11 +12,11 @@ $(document).ready(function () {
     
     
     if(window.localStorage.getItem("isDirector") != 1 ){
-        $("li.rbc").hide();
+        $(".rbc").hide();
     }
     
     if(window.localStorage.getItem("id") == null){
-        $("ul.sidebar-nav").hide();
+        $(".menuu").hide();
     }
     
     document.addEventListener('deviceready', function () {
