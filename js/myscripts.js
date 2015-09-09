@@ -9,6 +9,16 @@ function progress(e) {
 
 
 $(document).ready(function () {
+    
+    
+    if(window.localStorage.getItem("isDirector") != 1 ){
+        $("li.rbc").hide();
+    }
+    
+    if(!window.localStorage.getItem("id")){
+        $("ul.sidebar-nav").hide();
+    }
+    
     document.addEventListener('deviceready', function () {
         initPushwoosh();
 
