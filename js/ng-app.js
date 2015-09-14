@@ -1,5 +1,6 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
+
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
 
 app.filter('convertToDate', function () {
@@ -173,11 +174,19 @@ app.controller('meetingsController', function ($scope, $http) {
 });
 
 app.controller('joinMeetingController', function ($scope, $http) {
+
+
+
     $scope.user = window.localStorage.getItem("userDname");
 
     $scope.director = window.localStorage.getItem("isDirector");
 
     $scope.userId = window.localStorage.getItem("id");
+
+
+    $scope.openlink = function (link) {
+        window.open('http://icorp.soft-craft.in/data/attachments/' + link, '_system');
+    };
 
     if (navigator.onLine === true) {
         $.ajax({
@@ -315,7 +324,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
             });
         } else {
             $scope.comments = $.parseJSON(window.localStorage.getItem("comment_" + id));
-
+            $('#myModal11').modal('toggle');
 
         }
     };
@@ -466,6 +475,42 @@ app.controller('joinMeetingController', function ($scope, $http) {
     };
 
 
+    $scope.getVotes = function (event, id, title) {
+        $scope.agendaTitle = title;
+        $scope.aId = id;
+        $scope.uId = window.localStorage.getItem("id");
+
+        if (navigator.onLine === true) {
+            angular.element(event.target).children("i").attr("class", "fa fa-spinner fa-pulse");
+            angular.element(event.target).prop("disabled", "disabled");
+
+            $.ajax({
+                url: domain + "agenda-votes",
+                type: 'GET',
+                data: {id: id, userId: window.localStorage.getItem("id")},
+                success: function (response) {
+                    window.localStorage.setItem("avotes_" + id, JSON.stringify(response));
+                    $scope.$apply(function () {
+                        $scope.votes = response;
+
+                    });
+                   $('#myModal11').modal('toggle');
+                    $('a.btn-info').children("i").removeAttr("class");
+                    $('a.btn-info').removeAttr("disabled");
+
+
+                }
+            });
+        } else {
+            $scope.votes = $.parseJSON(window.localStorage.getItem("avotes_" + id));
+            $('#myModal11').modal('toggle');
+            $('a.btn-info').children("i").removeAttr("class");
+            $('a.btn-info').removeAttr("disabled");
+
+        }
+    };
+
+
 
 });
 
@@ -494,7 +539,15 @@ app.controller('rbcController', function ($scope, $http) {
         $('.spinner').fadeOut(1000);
     }
     $scope.vote = function (event, id, title, vote) {
-        var data = {id: id, userId: window.localStorage.getItem("id"), vote: vote};
+
+        var currentdate = new Date();
+        var datetime = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth() + 1) + "-"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+        var data = {id: id, userId: window.localStorage.getItem("id"), vote: vote, voted_datetime: datetime};
 
         var url = domain + "vote-rbc";
 

@@ -9,9 +9,7 @@ function progress(e) {
 
 
 $(document).ready(function () {
-    setInterval(function(){  if(window.localStorage.getItem("isDirector") != 1 ){
-        $(".rbc").hide();
-    }
+    setInterval(function(){ 
     
     if(window.localStorage.getItem("id") == null){
         $(".menuu").hide();

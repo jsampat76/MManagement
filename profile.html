@@ -22,7 +22,7 @@
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="profileController">
-                    <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
+                   <div class="maintitle"><img src="images/profile.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
                     <h1>Manage Profile</h1>
                     <div class="row mt10">
                         <ul class="nav nav-tabs" role="tablist">
@@ -63,12 +63,12 @@
 
                                             <div class="form-group col-sm-3">
                                                 <label for="inputEmail" class="control-label">Mobile #</label>
-                                                <input type="text" maxlength="10" class="form-control" ng-model="pdetails.mobile"   name="mobile" placeholder="Mobile number" onchange="validateMobile('frmProfile')" onkeyup="validateMobile('frmProfile')">
+                                                <input type="text" maxlength="10" class="form-control" ng-model="pdetails.mobile"   name="mobile" placeholder="Mobile number" onChange="validateMobile('frmProfile')" onKeyUp="validateMobile('frmProfile')">
                                             </div>
 
                                             <div class="form-group col-sm-3">
                                                 <label class="control-label">Landline #</label>
-                                                <input type="text" maxlength="11" class="form-control" ng-model="pdetails.landline"   name="landline" placeholder="Landline Number" onchange="validateLandline('frmProfile')" onkeyup="validateLandline('frmProfile')">
+                                                <input type="text" maxlength="11" class="form-control" ng-model="pdetails.landline"   name="landline" placeholder="Landline Number" onChange="validateLandline('frmProfile')" onKeyUp="validateLandline('frmProfile')">
 
                                             </div>
 

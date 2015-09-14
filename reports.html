@@ -20,31 +20,22 @@
             <div class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate" ng-include="'includes/nav.html'"></div>
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
-                <div class="container-fluid" ng-controller="meetingsController">
-                  <div class="maintitle"><img src="images/meetings.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
-                    <h1>Scheduled Meetings</h1>
+                <div class="container-fluid" ng-controller="rbcController">
+                   <div class="maintitle"><img src="images/reports.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
+                    <h1>Reports</h1>
+                    <div class="row mt10">
+                        <div style="text-align:center;">Coming Soon</div>
 
-                    <div class="row">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Date/Time</th>
-                                    <th>Action</th>
-                                </tr>
-                                <tr ng-repeat="meeting in meetings">
-                                    <td>{{ meeting.title}}<br>{{ meeting.venue.venue_name}}</td>
-                                    <td><a href="#" ng-click="addToCalendar(meeting.title, meeting.venue.venue_name, meeting.datetime_ofmeeting)">{{ meeting.datetime_ofmeeting}}</a></td>
-                                    <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-sm {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View Scheduled Meeting" : "Join the Meeting" }}</a></td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
+
         <script src="phonegap.js"></script>
-        <script src="js/plugins/Calendar.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>

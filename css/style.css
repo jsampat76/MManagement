@@ -1,7 +1,7 @@
 body {
   padding-top: 100px;
 }
-
+.text-inside { float:right;}
 .icons { float:right; text-align:center; padding:0; margin:0;}
 .icons a { text-align:center; margin:0 5px;}
 h1 { color:#dd4814;}
@@ -204,7 +204,7 @@ p {
 .mt50{margin-top:50px;}
 .qtyinput{height:30px; }
 .h30{  line-height: 22px;}
-.tab-content{font-size:12px;}
+.tab-content{font-size:15px;}
 .nav>li>a{padding:10px 20px; font-size: 20px; font-weight:400;}
 .h84{height:84px;}
 .mt30{margin-top:30px;}

@@ -21,7 +21,7 @@
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="joinMeetingController">
-                    <h4 class="text-capitalize text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4>
+                    <div class="maintitle"><a href="archive.html"><img src="images/archive-b.png"></a> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
                     <h1>{{ meeting.title}}</h1>
                     <p class="">{{meeting.purpose}}</p>
                     <div class="row">
@@ -65,15 +65,14 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Designation</th>
-                                            <th>Member's Confirmation</th>
+                                            <th>Admin's Attendance</th>
                                         </tr>
                                         <tr ng-repeat="invitee in meeting.invities">
                                             <td>{{ invitee.display_name}}</td>
                                             <td>{{ invitee.designation}}</td>
                                             <td>
-                                                <span ng-if="invitee.pivot.vote == null"><i class="fa fa-minus"></i></span>
-                                                <span ng-if="invitee.pivot.vote == 1" class="text-success"><i class="fa fa-check"></i> Attending</span>
-                                                <span ng-if="invitee.pivot.vote == 2" class="text-danger"><i class="fa fa-ban"></i> Not Attending</span>
+                                                <span ng-if="invitee.pivot.admin_vote == 1" class="text-success"><i class="fa fa-check"></i> Present</span>
+                                                <span ng-if="invitee.pivot.admin_vote == 2" class="text-danger"><i class="fa fa-ban"></i> Absent</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -85,13 +84,20 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Body</th>
-                                            <th>Comment</th>
+                                            <th>Attachments</th>
+                                            <th>Votes</th>
+                                            <th>Director's Comments</th>
                                             <th ng-if="director == 1">Director's Note</th>
                                         </tr>
                                         <tr ng-repeat="blist in meeting.agenda">
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
-                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Comment</a></td>
+                                            <td>
+                                                <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a></span>
+                                            </td>
+                                            <td><a href="#" ng-click="getVotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Votes</a></td>
+
+                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Comments</a></td>
                                             <td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
 
                                         </tr>
@@ -105,6 +111,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
+<!--                                            <th>Agenda</th>-->
                                             <th>Title</th>
                                             <th>Body</th>
                                             <th>Date</th>
@@ -112,6 +119,7 @@
 
                                         </tr>
                                         <tr ng-repeat="blist in meeting.minutes">
+<!--                                            <td>{{ blist.agenda.title}}</td>-->
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td>{{ blist.created_datetime}}</td>
@@ -140,7 +148,7 @@
                                             <div class="panel-body">
                                                 {{ comm.pivot.comment}}
                                             </div>
-                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented | convertToDate | date:'dd, MMMM yyyy' }}</div>
+                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented}}</div>
                                         </div>
 
                                     </div>
@@ -172,7 +180,35 @@
                                             <div class="panel-body">
                                                 {{ comm.pivot.comment}}
                                             </div>
-                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented | convertToDate | date:'dd, MMMM yyyy' }}</div>
+                                            <div class="panel-footer text-info text-right"><i class="fa fa-clock-o"></i> {{ comm.pivot.datetime_commented}}</div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Votes on "{{ agendaTitle}}"</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="panel panel-default" ng-repeat="v in votes">
+                                            <div class="panel-heading panel-danger">
+                                                <h3 class="panel-title">{{ v.display_name}} - {{ v["pivot"]["vote"] == 1 ? "Yes" : (v["pivot"]["vote"] == 2 ? "No" : "Abstained") }}</h3>
+                                            </div>
+
                                         </div>
 
                                     </div>
