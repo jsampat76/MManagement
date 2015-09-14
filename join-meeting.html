@@ -178,7 +178,7 @@
                         </div>-->
                         
                         
-                        <div class="col-md-12 mt10 mb10 cbox" ng-show="confirmation[0].pivot.vote == null && meeting.status == 'scheduled'" >
+                        <div class="col-md-12 mt10 mb10 cbox" ng-show="confirmation[0].pivot.vote == null && meeting.status != 'inprogress'" >
                             Confirm your Attendance <span ><a href="#" ng-click="attend($event, meeting.id, 1)" class="btn btn-xs btn-success" ><i class="fa fa-check"></i> Yes</a> <a href="#" ng-click="attend($event, meeting.id, 2)" class="btn btn-xs btn-danger" ><i class="fa fa-ban"></i> No</a></span>
                         </div>
                         <div class="col-md-12 mt10 mb10 attending" ng-show="confirmation[0].pivot.vote == 1" >
