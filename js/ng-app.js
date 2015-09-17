@@ -159,8 +159,10 @@ app.controller('meetingsController', function ($scope, $http) {
     }
 
     $scope.addToCalendar = function (title, location, date) {
-        var startDate = new Date("17, Sep 2015 10:15:00 pm");
-        var endDate = "";
+        var startDate = new Date(date); //set to PG Day workshop date
+        var endDate = new Date();
+        endDate.setTime(startDate.getTime() + 18000000);
+        alert(startDate + " " + endDate);
         var notes = "";
         var success = function (message) {
             alert("Success: " + JSON.stringify(message));
@@ -168,7 +170,10 @@ app.controller('meetingsController', function ($scope, $http) {
         var error = function (message) {
             alert("Error: " + message);
         };
-        window.plugins.calendar.createEvent(title, location, notes, startDate, endDate, success, error);
+        // create a calendar (iOS only for now)
+        window.plugins.calendar.createCalendar("iCorpMM Calendar", success, error);
+        window.plugins.calendar.createEventInteractively(title, location, notes, startDate, endDate, success, error);
+
 
     }
 });
@@ -494,7 +499,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                         $scope.votes = response;
 
                     });
-                   $('#myModal11').modal('toggle');
+                    $('#myModal11').modal('toggle');
                     $('a.btn-info').children("i").removeAttr("class");
                     $('a.btn-info').removeAttr("disabled");
 
@@ -798,6 +803,30 @@ app.controller('archiveController', function ($scope, $http) {
         });
     } else {
         $scope.meetings = $.parseJSON(window.localStorage.getItem("archive"));
+        $('.spinner').fadeOut(1000);
+    }
+});
+
+
+app.controller('reportsController', function ($scope, $http) {
+    $scope.user = window.localStorage.getItem("userDname");
+    $scope.director = window.localStorage.getItem("isDirector");
+
+    if (navigator.onLine === true) {
+        $.ajax({
+            url: domain + "reports",
+            type: 'GET',
+            data: {id: window.localStorage.getItem("id")},
+            success: function (response) {
+                window.localStorage.setItem("reports", JSON.stringify(response));
+                $scope.$apply(function () {
+                    $scope.reports = response;
+                });
+                $('.spinner').fadeOut(1000);
+            }
+        });
+    } else {
+        $scope.reports = $.parseJSON(window.localStorage.getItem("reports"));
         $('.spinner').fadeOut(1000);
     }
 });

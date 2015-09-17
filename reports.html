@@ -20,13 +20,107 @@
             <div class="col-xs-10 col-sm-6 col-md-4 sidebar sidebar-left sidebar-animate" ng-include="'includes/nav.html'"></div>
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
-                <div class="container-fluid" ng-controller="rbcController">
+                <div class="container-fluid" ng-controller="reportsController">
                    <div class="maintitle"><img src="images/reports.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
                     <h1>Reports</h1>
-                    <div class="row mt10">
-                        <div style="text-align:center;">Coming Soon</div>
+                           <div class="row mt10">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#desc" data-toggle="tab">My Notes</a></li>
+                            <li><a href="#ben" data-toggle="tab">Invited Members</a></li>
+                            <li><a href="#res" data-toggle="tab">Agendas</a></li>
+                            <li><a href="#blist" data-toggle="tab">Minutes</a></li>
+                        </ul>
 
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="desc" >
+<div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Meeting</th>
+                                            <th>Agenda</th>
+                                            <th>Note</th>
+                                        </tr>
+                                        <tr ng-repeat="note in reports.notes">
+                                            <td>{{ note.meeting}}</td>
+                                            <td>{{ note.title}}</td>
+                                            <td>{{ note.pivot.comment}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in " id="ben" >
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Designation</th>
+                                            <th>Admin's Attendance</th>
+                                        </tr>
+                                        <tr ng-repeat="invitee in meeting.invities">
+                                            <td>{{ invitee.display_name}}</td>
+                                            <td>{{ invitee.designation}}</td>
+                                            <td>
+                                                <span ng-if="invitee.pivot.admin_vote == 1" class="text-success"><i class="fa fa-check"></i> Present</span>
+                                                <span ng-if="invitee.pivot.admin_vote == 2" class="text-danger"><i class="fa fa-ban"></i> Absent</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in " id="res" >
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Body</th>
+                                            <th>Attachments</th>
+                                            <th>Votes</th>
+                                            <th>Director's Comments</th>
+                                            <th ng-if="director == 1">Director's Note</th>
+                                        </tr>
+                                        <tr ng-repeat="blist in meeting.agenda">
+                                            <td>{{ blist.title}}</td>
+                                            <td ng-bind-html="blist.body | base64decode | unsafe"></td>
+                                            <td>
+                                                <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a></span>
+                                            </td>
+                                            <td><a href="#" ng-click="getVotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Votes</a></td>
+
+                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Comments</a></td>
+                                            <td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade in " id="blist">
+
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+<!--                                            <th>Agenda</th>-->
+                                            <th>Title</th>
+                                            <th>Body</th>
+                                            <th>Date</th>
+
+
+                                        </tr>
+                                        <tr ng-repeat="blist in meeting.minutes">
+<!--                                            <td>{{ blist.agenda.title}}</td>-->
+                                            <td>{{ blist.title}}</td>
+                                            <td ng-bind-html="blist.body | base64decode | unsafe"></td>
+                                            <td>{{ blist.created_datetime}}</td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+              
 
 
 
