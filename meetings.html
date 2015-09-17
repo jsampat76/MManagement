@@ -21,7 +21,7 @@
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="meetingsController">
-                  <div class="maintitle"><img src="images/meetings.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
+                    <div class="maintitle"><img src="images/meetings.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
                     <h1>Scheduled Meetings</h1>
 
                     <div class="row">
@@ -34,7 +34,7 @@
                                 </tr>
                                 <tr ng-repeat="meeting in meetings">
                                     <td>{{ meeting.title}}<br>{{ meeting.venue.venue_name}}</td>
-                                    <td><a href="#" ng-click="addToCalendar(meeting.title, meeting.venue.venue_name, meeting.datetime_ofmeeting)">{{ meeting.datetime_ofmeeting}}</a></td>
+                                    <td><a href="#" ng-click="addToCalendar(meeting.title, meeting.venue.venue_name, meeting.meetingdate)">{{ meeting.datetime_ofmeeting}}</a></td>
                                     <td><a href="join-meeting.html?id={{meeting.id}}" class="btn btn-sm {{ meeting.status  == 'Scheduled' ? 'btn-info' : 'btn-success' }}"><i class="fa {{ meeting.status  == 'Scheduled' ? 'fa-eye' : 'fa-group' }}"></i> {{ meeting.status  == "Scheduled" ? "View Scheduled Meeting" : "Join the Meeting" }}</a></td>
                                 </tr>
                             </table>
@@ -44,7 +44,6 @@
             </div>
         </div>
         <script src="phonegap.js"></script>
-        <script src="js/plugins/Calendar.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/angular.min.js"></script>

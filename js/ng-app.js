@@ -159,6 +159,8 @@ app.controller('meetingsController', function ($scope, $http) {
     }
 
     $scope.addToCalendar = function (title, location, date) {
+        
+        alert(date);
         var startDate = new Date(date); //set to PG Day workshop date
         var endDate = new Date();
         endDate.setTime(startDate.getTime() + 18000000);
