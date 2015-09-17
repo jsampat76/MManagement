@@ -1,6 +1,6 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
-var store ="downloads";
+var store ="downloads/";
 
 var assetURL ="";
 
@@ -215,8 +215,8 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
                     $.each((value.attachments), function (k, v) {
 
-                        var assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
-                        var fileName = "/" + v.saved_filename;  // using an absolute path also does not work
+                         assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                         fileName =  v.saved_filename;  // using an absolute path also does not work
 
                    
                    	window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
@@ -876,7 +876,7 @@ app.controller('reportsController', function ($scope, $http) {
 
 function downloadAsset() {
     var fileTransfer = new FileTransfer();
-    alert("About to start transfer");
+    alert(assetURL + " " + fileName);
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                alert("Success!");
