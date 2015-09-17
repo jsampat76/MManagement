@@ -1,6 +1,6 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
-var store ="downloads/";
+var store;
 
 var assetURL ="";
 
@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-        window.open('downloads/' + link, '_blank', 'EnableViewPortScale=yes');
+        window.open( link, '_blank', 'EnableViewPortScale=yes');
     };
 
     if (navigator.onLine === true) {
