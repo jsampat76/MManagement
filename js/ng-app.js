@@ -175,6 +175,7 @@ app.controller('meetingsController', function ($scope, $http) {
             alert("Error: " + message);
         };
         // create a calendar (iOS only for now)
+        window.plugins.calendar.createCalendar(calendarName, success);
         window.plugins.calendar.createEventInNamedCalendar(title,location,notes,startDate,endDate,calendarName,success,error);
 
 
