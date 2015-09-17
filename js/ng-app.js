@@ -166,7 +166,6 @@ app.controller('meetingsController', function ($scope, $http) {
         var endDate = new Date();
         var calendarName = "iCorpMM Calendar";
         endDate.setTime(startDate.getTime() + 18000000);
-        alert(startDate + " " + endDate);
         var notes = "";
         var success = function (message) {
             alert("Success: " + JSON.stringify(message));
