@@ -877,15 +877,19 @@ app.controller('reportsController', function ($scope, $http) {
 function downloadAsset() {
     var fileTransfer = new FileTransfer();
     alert(assetURL + " " + fileName);
-    fileTransfer.download(assetURL, window.appRootDir.fullPath + "/" + store + fileName,
-            function (entry) {
-                alert("Success!");
 
-            },
-            function (err) {
-                alert("Error");
-                alert(JSON.stringify(err));
-            });
+
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+        var imagePath = fs.root.fullPath + "/" + store + fileName; // full file path
+        alert(imagePath);
+        var fileTransfer = new FileTransfer();
+        fileTransfer.download(assetURL, imagePath, function (entry) {
+            alert(entry.fullPath); // entry is fileEntry object
+        }, function (err) {
+            alert("Error");
+            alert(JSON.stringify(err));
+        });
+    });
 }
 
 //I'm only called when the file exists or has been downloaded.
