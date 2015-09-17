@@ -884,7 +884,7 @@ function downloadAsset() {
             },
             function (err) {
                 alert("Error");
-                alert(err);
+                alert(JSON.stringify(err));
             });
 }
 
