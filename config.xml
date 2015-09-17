@@ -16,6 +16,7 @@
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.2" />
     <gap:plugin name="nl.x-services.plugins.calendar" version="4.2.4" />
+    <gap:plugin name="org.apache.cordova.file-transfer" version="0.4.6" />
 
     <access origin="*"/> <!-- allow all pages, use for development -->
     <access origin="*.pushwoosh.com"/> <!-- allow pushwoosh service -->
