@@ -1,8 +1,8 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
-var store;
+var store = "downloads/";
 
-var assetURL ="";
+var assetURL = "";
 
 var fileName = "";
 
@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-        window.open( link, '_blank', 'EnableViewPortScale=yes');
+        window.open('downloads/' + link, '_blank', 'EnableViewPortScale=yes');
     };
 
     if (navigator.onLine === true) {
@@ -215,16 +215,16 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
                     $.each((value.attachments), function (k, v) {
 
-                         assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
-                         fileName =  v.saved_filename;  // using an absolute path also does not work
+                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                        fileName = v.saved_filename;  // using an absolute path also does not work
 
-                   
-                   	window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
-                   
-                   
-                   
-                   
+                        window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+
+
+
+
                     });
                 });
 
@@ -877,10 +877,10 @@ app.controller('reportsController', function ($scope, $http) {
 function downloadAsset() {
     var fileTransfer = new FileTransfer();
     alert(assetURL + " " + fileName);
-    fileTransfer.download(assetURL, store + fileName,
+    fileTransfer.download(assetURL, window.appRootDir.fullPath + "/" + store + fileName,
             function (entry) {
-               alert("Success!");
-       
+                alert("Success!");
+
             },
             function (err) {
                 alert("Error");
