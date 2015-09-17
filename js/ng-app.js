@@ -159,10 +159,10 @@ app.controller('meetingsController', function ($scope, $http) {
     }
 
     $scope.addToCalendar = function (title, location, date) {
-        
-     
+
+
         date = date.split(",");
-        var startDate = new Date(date[0],(parseInt(date[1]) - 1),date[2],date[3],date[4],date[5],0,0); //set to PG Day workshop date
+        var startDate = new Date(date[0], (parseInt(date[1]) - 1), date[2], date[3], date[4], date[5], 0, 0); //set to PG Day workshop date
         var endDate = new Date();
         var calendarName = "iCorpMM Calendar";
         endDate.setTime(startDate.getTime() + 18000000);
@@ -175,7 +175,7 @@ app.controller('meetingsController', function ($scope, $http) {
         };
         // create a calendar (iOS only for now)
         window.plugins.calendar.createCalendar(calendarName);
-        window.plugins.calendar.createEventInNamedCalendar(title,location,notes,startDate,endDate,calendarName,success,error);
+        window.plugins.calendar.createEventInNamedCalendar(title, location, notes, startDate, endDate, calendarName, success, error);
 
 
 
@@ -194,7 +194,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-        window.open('http://icorp.soft-craft.in/data/attachments/' + link, '_system');
+        window.open('downloads/' + link, '_blank', 'EnableViewPortScale=yes');
     };
 
     if (navigator.onLine === true) {
@@ -203,7 +203,48 @@ app.controller('joinMeetingController', function ($scope, $http) {
             type: 'GET',
             data: {id: getUrlParameter("id"), userId: window.localStorage.getItem("id")},
             success: function (response) {
+
+
+                $.each((response.agenda), function (key, value) {
+
+
+                    $.each((value.attachments), function (k, v) {
+                        alert(v.saved_filename);
+
+                        var downloadUrl = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                        var relativeFilePath = "downloads/" + v.saved_filename;  // using an absolute path also does not work
+
+                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
+                            var fileTransfer = new FileTransfer();
+                            fileTransfer.download(
+                                    downloadUrl,
+                                    // The correct path!
+                                    fileSystem.root.toURL() + '/' + relativeFilePath,
+                                    function (entry) {
+                                        alert("Success");
+                                    },
+                                    function (error) {
+                                        alert("Error during download. Code = " + error.code);
+                                    }
+                            );
+                        });
+                    });
+                });
+
+
+
+
+
+
+
+
+
+
                 window.localStorage.setItem("meeting_" + getUrlParameter("id"), JSON.stringify(response));
+
+
+
+
                 $scope.$apply(function () {
                     $scope.meeting = response;
 
