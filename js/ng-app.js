@@ -168,13 +168,13 @@ app.controller('meetingsController', function ($scope, $http) {
         endDate.setTime(startDate.getTime() + 18000000);
         var notes = "";
         var success = function (message) {
-            alert("Success: " + JSON.stringify(message));
+            alert("Meeting added to the calendar Successfully!");
         };
         var error = function (message) {
-            alert("Error: " + message);
+            alert("Could not Add the Meeting!");
         };
         // create a calendar (iOS only for now)
-        window.plugins.calendar.createCalendar(calendarName, success);
+        window.plugins.calendar.createCalendar(calendarName);
         window.plugins.calendar.createEventInNamedCalendar(title,location,notes,startDate,endDate,calendarName,success,error);
 
 
