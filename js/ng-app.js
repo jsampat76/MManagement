@@ -1,10 +1,10 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
-var store = "downloads/";
+var store;
 
-var assetURL = "";
+var assetURL;
 
-var fileName = "";
+var fileName;
 
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
 
@@ -218,7 +218,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                         assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
                         fileName = v.saved_filename;  // using an absolute path also does not work
 
-
+                        store = cordova.file.dataDirectory;
                         window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
 
@@ -878,18 +878,16 @@ function downloadAsset() {
     var fileTransfer = new FileTransfer();
     alert(assetURL + " " + fileName);
 
+    fileTransfer.download(assetURL, store + fileName,
+            function (entry) {
+                alert(JSON.stringify(entry));
+            },
+            function (err) {
+                alert("Error");
+                alert(JSON.stringify(err));
+            });
 
-    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-        var imagePath = fs.root.fullPath + "/" + store + fileName; // full file path
-        alert(imagePath);
-        var fileTransfer = new FileTransfer();
-        fileTransfer.download(assetURL, imagePath, function (entry) {
-            alert(entry.fullPath); // entry is fileEntry object
-        }, function (err) {
-            alert("Error");
-            alert(JSON.stringify(err));
-        });
-    });
+
 }
 
 //I'm only called when the file exists or has been downloaded.
