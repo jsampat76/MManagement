@@ -209,8 +209,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
                     $.each((value.attachments), function (k, v) {
-                        alert(v.saved_filename);
-
+                   
                         var downloadUrl = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
                         var relativeFilePath = "downloads/" + v.saved_filename;  // using an absolute path also does not work
 
