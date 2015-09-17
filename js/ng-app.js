@@ -1,5 +1,10 @@
 var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
 
+var store ="downloads";
+
+var assetURL ="";
+
+var fileName = "";
 
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
 
@@ -209,24 +214,17 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
                     $.each((value.attachments), function (k, v) {
-                   
-                        var downloadUrl = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
-                        var relativeFilePath = "downloads/" + v.saved_filename;  // using an absolute path also does not work
 
-                        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSystem) {
-                            var fileTransfer = new FileTransfer();
-                            fileTransfer.download(
-                                    downloadUrl,
-                                    // The correct path!
-                                    fileSystem.root.toURL() + '/' + relativeFilePath,
-                                    function (entry) {
-                                        alert("Success");
-                                    },
-                                    function (error) {
-                                        alert("Error during download. Code = " + error.code);
-                                    }
-                            );
-                        });
+                        var assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                        var fileName = "/" + v.saved_filename;  // using an absolute path also does not work
+
+                   
+                   	window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+                   
+                   
+                   
+                   
                     });
                 });
 
@@ -874,3 +872,23 @@ app.controller('reportsController', function ($scope, $http) {
         $('.spinner').fadeOut(1000);
     }
 });
+
+
+function downloadAsset() {
+    var fileTransfer = new FileTransfer();
+    alert("About to start transfer");
+    fileTransfer.download(assetURL, store + fileName,
+            function (entry) {
+               alert("Success!");
+       
+            },
+            function (err) {
+                alert("Error");
+                alert(err);
+            });
+}
+
+//I'm only called when the file exists or has been downloaded.
+function appStart() {
+    alert("App ready!");
+}
