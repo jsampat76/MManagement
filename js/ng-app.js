@@ -160,9 +160,11 @@ app.controller('meetingsController', function ($scope, $http) {
 
     $scope.addToCalendar = function (title, location, date) {
         
-        alert(date);
-        var startDate = new Date(date); //set to PG Day workshop date
+     
+        date = date.split(",");
+        var startDate = new Date(date[0],(parseInt(date[1]) - 1),date[2],date[3],date[4],date[5],0,0); //set to PG Day workshop date
         var endDate = new Date();
+        var calendarName = "iCorpMM Calendar";
         endDate.setTime(startDate.getTime() + 18000000);
         alert(startDate + " " + endDate);
         var notes = "";
@@ -174,7 +176,8 @@ app.controller('meetingsController', function ($scope, $http) {
         };
         // create a calendar (iOS only for now)
         window.plugins.calendar.createCalendar("iCorpMM Calendar", success, error);
-        window.plugins.calendar.createEventInteractively(title, location, notes, startDate, endDate, success, error);
+        window.plugins.calendar.createEventInNamedCalendar(title,location,notes,startDate,endDate,calendarName,success,error);
+
 
 
     }
