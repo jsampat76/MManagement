@@ -66,7 +66,7 @@
                                             <th>Title</th>
                                             <th>Body</th>
                                             <th ng-if="meeting.status != 'Scheduled' && director == 1">Vote</th>
-                                            <th>Attachments</th>
+<!--                                            <th>Attachments</th>-->
                                             <th> Director's Comment</th>
                                             <th ng-if="director == 1">Director's Note</th>
                                         </tr>
@@ -75,9 +75,9 @@
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td ng-if="!blist.votes.length && meeting.status != 'Scheduled' && director == 1"><a href="#" class="btn btn-xs btn-success" ng-click="vote($event, blist.id, blist.title, 1)"><i></i> Yes</a> <a href="#" class="btn btn-xs btn-danger" ng-click="vote($event, blist.id, blist.title, 2)"><i></i> No</a> <a href="#" ng-click="vote($event, blist.id, blist.title, 3)" class="btn btn-xs btn-warning"><i></i> Abstained</a></td>
                                             <td ng-if="blist.votes.length && meeting.status != 'Scheduled' && director == 1"> You have voted {{ blist["votes"][0]["pivot"]["vote"] == 1 ? "Yes" : (blist["votes"][0]["pivot"]["vote"] == 2 ? "No" : "Abstained") }}</td>
-                                            <td>
+<!--                                            <td>
                                                 <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename }}</a></span>
-                                            </td>
+                                            </td>-->
                                             <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i>Director's Comment</a></td>
                                             <td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
 
