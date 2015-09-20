@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-        window.open('downloads/' + link, '_blank', 'EnableViewPortScale=yes');
+        window.open(store + link, '_blank', 'EnableViewPortScale=yes');
     };
 
     if (navigator.onLine === true) {
@@ -211,7 +211,6 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
                 store = cordova.file.dataDirectory;
 
-                alert(store);
                 $.each((response.agenda), function (key, value) {
 
 
@@ -878,8 +877,7 @@ app.controller('reportsController', function ($scope, $http) {
 
 function downloadAsset() {
     var fileTransfer = new FileTransfer();
-    alert(assetURL + " " + fileName);
-
+  
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                 alert(JSON.stringify(entry));
