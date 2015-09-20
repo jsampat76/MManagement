@@ -209,7 +209,9 @@ app.controller('joinMeetingController', function ($scope, $http) {
             data: {id: getUrlParameter("id"), userId: window.localStorage.getItem("id")},
             success: function (response) {
 
+                store = cordova.file.dataDirectory;
 
+                alert(store);
                 $.each((response.agenda), function (key, value) {
 
 
@@ -218,7 +220,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                         assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
                         fileName = v.saved_filename;  // using an absolute path also does not work
 
-                        store = cordova.file.dataDirectory;
+
                         window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
 
