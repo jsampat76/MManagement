@@ -227,11 +227,11 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
                         fileTransfer.download(assetURL, store + fileName,
                                 function (entry) {
-                                    alert(JSON.stringify(entry));
+                                    //  alert(JSON.stringify(entry));
                                 },
                                 function (err) {
-                                    alert("Error");
-                                    alert(JSON.stringify(err));
+                                    alert("Error occurred in downloading the attachments");
+                                    //  alert(JSON.stringify(err));
                                 });
 
 
@@ -383,7 +383,9 @@ app.controller('joinMeetingController', function ($scope, $http) {
             });
         } else {
             $scope.comments = $.parseJSON(window.localStorage.getItem("comment_" + id));
-            $('#myModal11').modal('toggle');
+            $('#myModal').modal('toggle');
+            $('a.btn-info').children("i").removeAttr("class");
+            $('a.btn-info').removeAttr("disabled");
 
         }
     };
@@ -488,6 +490,9 @@ app.controller('joinMeetingController', function ($scope, $http) {
             });
         } else {
             $scope.notes = $.parseJSON(window.localStorage.getItem("note_" + id));
+            $('#myModal2').modal('toggle');
+            $('a.btn-info').children("i").removeAttr("class");
+            $('a.btn-info').removeAttr("disabled");
 
 
         }
