@@ -84,7 +84,7 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Body</th>
-<!--                                            <th>Attachments</th>-->
+                                            <th>Attachments</th>
                                             <th>Votes</th>
                                             <th>Director's Comments</th>
                                             <th ng-if="director == 1">Director's Note</th>
@@ -92,9 +92,9 @@
                                         <tr ng-repeat="blist in meeting.agenda">
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
-<!--                                            <td>
+                                            <td>
                                                 <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a></span>
-                                            </td>-->
+                                            </td>
                                             <td><a href="#" ng-click="getVotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Votes</a></td>
 
                                             <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Comments</a></td>
@@ -111,7 +111,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-<!--                                            <th>Agenda</th>-->
+                                            <th>Agenda</th>
                                             <th>Title</th>
                                             <th>Body</th>
                                             <th>Date</th>
@@ -119,7 +119,7 @@
 
                                         </tr>
                                         <tr ng-repeat="blist in meeting.minutes">
-<!--                                            <td>{{ blist.agenda.title}}</td>-->
+                                            <td>{{ blist.agenda.title}}</td>
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td>{{ blist.created_datetime}}</td>

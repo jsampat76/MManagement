@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-         window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes');
     };
 
     if (navigator.onLine === true) {
@@ -223,12 +223,14 @@ app.controller('joinMeetingController', function ($scope, $http) {
                         // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
                         var fileTransfer = new FileTransfer();
-
+                        $('.spinner').show();
                         fileTransfer.download(assetURL, store + fileName,
                                 function (entry) {
                                     //  alert(JSON.stringify(entry));
+                                    $('.spinner').fadeOut(1000);
                                 },
                                 function (err) {
+                                    $('.spinner').fadeOut(1000);
                                     alert("Error occurred in downloading the attachments");
                                     //  alert(JSON.stringify(err));
                                 });
