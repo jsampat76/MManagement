@@ -21,19 +21,19 @@
             <div id="page-content-wrapper">
                 <div ng-include="'includes/header.html'"></div>
                 <div class="container-fluid" ng-controller="reportsController">
-                   <div class="maintitle"><img src="images/reports.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
+                    <div class="maintitle"><img src="images/reports.png"> <h4 class="text-inside text-right">Welcome  <span class=" text-success">{{ user}}!</span></h4></div>
                     <h1>Reports</h1>
-                           <div class="row mt10">
+                    <div class="row mt10">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active"><a href="#desc" data-toggle="tab">My Notes</a></li>
-                            <li><a href="#ben" data-toggle="tab">Invited Members</a></li>
+                            <li><a href="#ben" data-toggle="tab">My Attendance</a></li><!--
                             <li><a href="#res" data-toggle="tab">Agendas</a></li>
-                            <li><a href="#blist" data-toggle="tab">Minutes</a></li>
+                            <li><a href="#blist" data-toggle="tab">Minutes</a></li>-->
                         </ul>
 
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="desc" >
-<div class="table-responsive">
+                                <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
                                             <th>Meeting</th>
@@ -52,16 +52,16 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Designation</th>
-                                            <th>Admin's Attendance</th>
+                                            <th>Meeting</th>
+                                            <th>Date</th>
+                                            <th>Attendance</th>
                                         </tr>
-                                        <tr ng-repeat="invitee in meeting.invities">
-                                            <td>{{ invitee.display_name}}</td>
-                                            <td>{{ invitee.designation}}</td>
+                                        <tr ng-repeat="meeting in reports.meetings">
+                                            <td>{{ meeting.title}}</td>
+                                            <td>{{ meeting.datetime_ofmeeting}}</td>
                                             <td>
-                                                <span ng-if="invitee.pivot.admin_vote == 1" class="text-success"><i class="fa fa-check"></i> Present</span>
-                                                <span ng-if="invitee.pivot.admin_vote == 2" class="text-danger"><i class="fa fa-ban"></i> Absent</span>
+                                                <span ng-if="meeting.invities[0].pivot.admin_vote == 1" class="text-success"><i class="fa fa-check"></i> Present</span>
+                                                <span ng-if="meeting.invitee[0].pivot.admin_vote == 2" class="text-danger"><i class="fa fa-ban"></i> Absent</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -100,7 +100,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-<!--                                            <th>Agenda</th>-->
+                                            <!--                                            <th>Agenda</th>-->
                                             <th>Title</th>
                                             <th>Body</th>
                                             <th>Date</th>
@@ -108,7 +108,7 @@
 
                                         </tr>
                                         <tr ng-repeat="blist in meeting.minutes">
-<!--                                            <td>{{ blist.agenda.title}}</td>-->
+                                            <!--                                            <td>{{ blist.agenda.title}}</td>-->
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td>{{ blist.created_datetime}}</td>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-              
+
 
 
 

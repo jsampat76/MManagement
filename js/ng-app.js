@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
 
     $scope.openlink = function (link) {
-        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
     };
 
     if (navigator.onLine === true) {
