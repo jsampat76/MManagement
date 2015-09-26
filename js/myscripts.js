@@ -230,7 +230,7 @@ function sync() {
                                         function (err) {
                                             $('#syncNow i').removeClass("fa-spin");
                                             $('#syncNow span').text("Synced");
-                                            alert("Error occurred in downloading the attachments");
+
                                         });
                             });
                         });
@@ -275,7 +275,6 @@ function sync() {
                             function (err) {
                                 $('#syncNow i').removeClass("fa-spin");
                                 $('#syncNow span').text("Synced");
-                                alert("Error occurred in downloading the attachments");
                                 //  alert(JSON.stringify(err));
                             });
 
@@ -353,7 +352,6 @@ function sync() {
                                         function (err) {
                                             $('#syncNow i').removeClass("fa-spin");
                                             $('#syncNow span').text("Synced");
-                                            alert("Error occurred in downloading the attachments");
                                         });
                             });
                         });

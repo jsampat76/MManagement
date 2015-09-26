@@ -199,7 +199,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
  
     $scope.openlink = function (link) {
-        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close,toolbar=no');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
     };
 
     if (navigator.onLine === true) {
@@ -231,7 +231,7 @@ app.controller('joinMeetingController', function ($scope, $http) {
                                 },
                                 function (err) {
                                     $('.spinner').fadeOut(1000);
-                                    alert("Error occurred in downloading the attachments");
+                                  
                                     //  alert(JSON.stringify(err));
                                 });
 
@@ -587,7 +587,7 @@ app.controller('rbcController', function ($scope, $http) {
     $scope.userId = window.localStorage.getItem("id");
 
     $scope.openlink = function (link) {
-        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close,toolbar=no');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
     };
 
     if (navigator.onLine === true) {
@@ -619,7 +619,7 @@ app.controller('rbcController', function ($scope, $http) {
                                 },
                                 function (err) {
                                     $('.spinner').fadeOut(1000);
-                                    alert("Error occurred in downloading the attachments");
+                                
                                     //  alert(JSON.stringify(err));
                                 });
 
