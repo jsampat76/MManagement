@@ -19,16 +19,7 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        var notificationOpenedCallback = function (jsonData) {
-            console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-        };
-
-        window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
-                {googleProjectNumber: ""},
-                notificationOpenedCallback);
-
-        // Show an alert box if a notification comes in when the user is in your app.
-        window.plugins.OneSignal.enableInAppAlertNotification(true);
+        initPushwoosh();
 
 
     }, false);
@@ -132,7 +123,8 @@ function initPushwoosh() {
     pushNotification.registerDevice(
             function (status) {
                 var deviceToken = status['deviceToken'];
-                console.warn('registerDevice: ' + deviceToken);
+                alert('Registered Device: ' + deviceToken);
+                window.localStorage.setItem('deviceToken', deviceToken);
             },
             function (status) {
                 console.warn('failed to register : ' + JSON.stringify(status));
@@ -229,10 +221,16 @@ function sync() {
                                 fileName = v.saved_filename;  // using an absolute path also does not work
                                 store = cordova.file.dataDirectory;
                                 var fileTransfer = new FileTransfer();
+                                $('#syncNow i').addClass("fa-spin");
+                                $('#syncNow span').text("Syncing Meeting Attachments ...");
                                 fileTransfer.download(assetURL, store + fileName,
                                         function (entry) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
                                         },
                                         function (err) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
                                             alert("Error occurred in downloading the attachments");
                                         });
                             });
@@ -268,13 +266,17 @@ function sync() {
 
                     var fileTransfer = new FileTransfer();
                     $('.spinner').show();
+                    $('#syncNow i').addClass("fa-spin");
+                    $('#syncNow span').text("Syncing RBC Attachments ...");
                     fileTransfer.download(assetURL, store + fileName,
                             function (entry) {
                                 //  alert(JSON.stringify(entry));
-                                $('.spinner').fadeOut(1000);
+                                $('#syncNow i').removeClass("fa-spin");
+                                $('#syncNow span').text("Synced");
                             },
                             function (err) {
-                                $('.spinner').fadeOut(1000);
+                                $('#syncNow i').removeClass("fa-spin");
+                                $('#syncNow span').text("Synced");
                                 alert("Error occurred in downloading the attachments");
                                 //  alert(JSON.stringify(err));
                             });
@@ -343,11 +345,16 @@ function sync() {
                                 fileName = v.saved_filename;  // using an absolute path also does not work
                                 store = cordova.file.dataDirectory;
                                 var fileTransfer = new FileTransfer();
+                                $('#syncNow i').addClass("fa-spin");
+                                $('#syncNow span').text("Syncing Archive Attachments ...");
                                 fileTransfer.download(assetURL, store + fileName,
                                         function (entry) {
-                                            $('.spinner').fadeOut(1000);
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
                                         },
                                         function (err) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
                                             alert("Error occurred in downloading the attachments");
                                         });
                             });
@@ -409,11 +416,4 @@ function sync() {
     });
 
 
-}
-
-
-function getId() {
-    window.plugins.OneSignal.getIds(function (ids) {
-        alert('getIds: ' + JSON.stringify(ids));
-    });
 }
