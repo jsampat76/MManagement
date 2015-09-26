@@ -55,7 +55,7 @@ app.controller('loginController', function ($scope, $http) {
                     window.localStorage.setItem("userDesgn", response.designation);
                     window.localStorage.setItem("isDirector", response.designation.toLowerCase().indexOf("director") > -1 ? 1 : 0);
                     window.localStorage.setItem("userPassword", $scope.password);
-                    window.location.href = "scheduler.html";
+                    window.location.href = "index.html";
                 }
             }
         });
@@ -586,6 +586,10 @@ app.controller('rbcController', function ($scope, $http) {
 
     $scope.userId = window.localStorage.getItem("id");
 
+    $scope.openlink = function (link) {
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
+    };
+
     if (navigator.onLine === true) {
         $.ajax({
             url: domain + "rbc",
@@ -593,6 +597,38 @@ app.controller('rbcController', function ($scope, $http) {
             data: {userId: window.localStorage.getItem("id")},
             success: function (response) {
                 window.localStorage.setItem("rbc", JSON.stringify(response));
+
+                $.each((response), function (key, value) {
+
+
+                    $.each((value.attachments), function (k, v) {
+
+                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                        fileName = v.saved_filename;  // using an absolute path also does not work
+                        store = cordova.file.dataDirectory;
+
+
+                        // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+                        var fileTransfer = new FileTransfer();
+                        $('.spinner').show();
+                        fileTransfer.download(assetURL, store + fileName,
+                                function (entry) {
+                                    //  alert(JSON.stringify(entry));
+                                    $('.spinner').fadeOut(1000);
+                                },
+                                function (err) {
+                                    $('.spinner').fadeOut(1000);
+                                    alert("Error occurred in downloading the attachments");
+                                    //  alert(JSON.stringify(err));
+                                });
+
+
+
+
+                    });
+                });
+
                 $scope.$apply(function () {
                     $scope.rbc = response;
                 });

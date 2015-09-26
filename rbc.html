@@ -30,14 +30,18 @@
                                     <th>Title</th>
                                     <th>Date</th>
                                     <th>Body</th>
+                                    <th>Attachments</th>
                                     <th ng-if="director == 1">Vote</th>
                                 </tr>
                                 <tr ng-repeat="blist in rbc">
                                     <td>{{ blist.title}}</td>
                                     <td>{{ blist.created_datetime}}</td>
                                     <td ng-bind-html="blist.body | base64decode | unsafe"></td>
+                                    <td>
+                                        <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a></span>
+                                    </td>
                                     <td ng-if='blist["invities"][0]["pivot"]["vote"] == null && director == 1'><a href="#" class="btn btn-xs btn-success" ng-click="vote($event, blist.id, blist.title, 1)"><i></i> Yes</a> <a href="#" class="btn btn-xs btn-danger" ng-click="vote($event, blist.id, blist.title, 2)"><i></i> No</a> <a href="#" ng-click="vote($event, blist.id, blist.title, 3)" class="btn btn-xs btn-warning"><i></i> Abstained</a></td>
-                                    <td ng-if='blist["invities"][0]["pivot"]["vote"] != null && director == 1'> {{ blist["invities"][0]["pivot"]["vote"] == 1 ? "Yes, Approved" : (blist["invities"][0]["pivot"]["vote"] == 2 ? "No, Disapproved" : "You Abstained") }}, {{ blist["invities"][0]["pivot"]['voted_datetime'] }}</td>
+                                    <td ng-if='blist["invities"][0]["pivot"]["vote"] != null && director == 1'> {{ blist["invities"][0]["pivot"]["vote"] == 1 ? "Yes, Approved" : (blist["invities"][0]["pivot"]["vote"] == 2 ? "No, Disapproved" : "You Abstained") }}, {{ blist["invities"][0]["pivot"]['voted_datetime']}}</td>
                                 </tr>
                             </table>
                         </div>
