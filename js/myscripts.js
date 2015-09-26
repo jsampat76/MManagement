@@ -67,7 +67,21 @@ $(document).ready(function () {
         $(this).children("ul").slideToggle(300);
     });
 
+
+
+    $("#syncNow").bind("click", function () {
+        $('#syncNow i').addClass("fa-spin");
+        $('#syncNow span').text("Syncing ...");
+
+        setTimeout(function () {
+            sync();
+        }, 1000);
+
+    });
+
 });
+
+
 
 function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
@@ -122,10 +136,11 @@ function initPushwoosh() {
 }
 
 
-
 function sync() {
 
-    $('.spinner').show();
+
+
+
 
     $.ajax({
         url: domain + "scheduler",
@@ -148,7 +163,6 @@ function sync() {
             });
         }
     });
-
 
     $.ajax({
         url: domain + "meetings",
@@ -230,6 +244,35 @@ function sync() {
         data: {userId: window.localStorage.getItem("id")},
         success: function (response) {
             window.localStorage.setItem("rbc", JSON.stringify(response));
+
+            $.each((response), function (key, value) {
+
+
+                $.each((value.attachments), function (k, v) {
+
+                    assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                    fileName = v.saved_filename;  // using an absolute path also does not work
+                    store = cordova.file.dataDirectory;
+
+
+                    // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+                    var fileTransfer = new FileTransfer();
+                    $('.spinner').show();
+                    fileTransfer.download(assetURL, store + fileName,
+                            function (entry) {
+                                //  alert(JSON.stringify(entry));
+                                $('.spinner').fadeOut(1000);
+                            },
+                            function (err) {
+                                $('.spinner').fadeOut(1000);
+                                alert("Error occurred in downloading the attachments");
+                                //  alert(JSON.stringify(err));
+                            });
+
+                });
+            });
+
 
         }
     });
@@ -350,7 +393,9 @@ function sync() {
         data: {userId: window.localStorage.getItem("id")},
         success: function (response) {
             window.localStorage.setItem("disc", JSON.stringify(response));
-            $('.spinner').fadeOut(1000);
+            $('#syncNow i').removeClass("fa-spin");
+            $('#syncNow span').text("Synced");
+
         }
     });
 

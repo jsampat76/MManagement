@@ -197,9 +197,9 @@ app.controller('joinMeetingController', function ($scope, $http) {
 
     $scope.userId = window.localStorage.getItem("id");
 
-
+ 
     $scope.openlink = function (link) {
-        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close,toolbar=no');
     };
 
     if (navigator.onLine === true) {
@@ -587,7 +587,7 @@ app.controller('rbcController', function ($scope, $http) {
     $scope.userId = window.localStorage.getItem("id");
 
     $scope.openlink = function (link) {
-        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close');
+        window.open(cordova.file.dataDirectory + link, '_blank', 'EnableViewPortScale=yes,location=no,closebuttoncaption=Close,toolbar=no');
     };
 
     if (navigator.onLine === true) {
