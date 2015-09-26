@@ -19,7 +19,16 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        initPushwoosh();
+        var notificationOpenedCallback = function (jsonData) {
+            console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+        };
+
+        window.plugins.OneSignal.init("53fbc7d0-39fc-11e5-b0bc-eb69920f0c40",
+                {googleProjectNumber: ""},
+                notificationOpenedCallback);
+
+        // Show an alert box if a notification comes in when the user is in your app.
+        window.plugins.OneSignal.enableInAppAlertNotification(true);
 
 
     }, false);
@@ -400,4 +409,11 @@ function sync() {
     });
 
 
+}
+
+
+function getId() {
+    window.plugins.OneSignal.getIds(function (ids) {
+        alert('getIds: ' + JSON.stringify(ids));
+    });
 }
