@@ -123,8 +123,7 @@ function initPushwoosh() {
     pushNotification.registerDevice(
             function (status) {
                 var deviceToken = status['deviceToken'];
-                alert('Registered Device: ' + deviceToken);
-                window.localStorage.setItem('deviceToken', deviceToken);
+                window.localStorage.setItem('oneSignalId', deviceToken);
             },
             function (status) {
                 console.warn('failed to register : ' + JSON.stringify(status));
@@ -265,7 +264,6 @@ function sync() {
                     // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
                     var fileTransfer = new FileTransfer();
-                    $('.spinner').show();
                     $('#syncNow i').addClass("fa-spin");
                     $('#syncNow span').text("Syncing RBC Attachments ...");
                     fileTransfer.download(assetURL, store + fileName,
