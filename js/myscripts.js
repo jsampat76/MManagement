@@ -70,12 +70,16 @@ $(document).ready(function () {
 
 
     $("#syncNow").bind("click", function () {
-        $('#syncNow i').addClass("fa-spin");
-        $('#syncNow span').text("Syncing ...");
+        if (navigator.onLine === true) {
+            $('#syncNow i').addClass("fa-spin");
+            $('#syncNow span').text("Syncing ...");
 
-        setTimeout(function () {
-            sync();
-        }, 1000);
+            setTimeout(function () {
+                sync();
+            }, 1000);
+        } else {
+            $('#syncNow span').text("Please Connect to the Internet first");
+        }
 
     });
 

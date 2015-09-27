@@ -36,14 +36,18 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-                                            <th>Meeting</th>
+
                                             <th>Agenda</th>
-                                            <th>Note</th>
+                                            <th>Note</th> 
+                                            <th>Meeting</th>
+                                            <th>Meeting Date</th>
                                         </tr>
                                         <tr ng-repeat="note in reports.notes">
-                                            <td>{{ note.meeting}}</td>
+
                                             <td>{{ note.title}}</td>
                                             <td>{{ note.pivot.comment}}</td>
+                                            <td>{{ note.meeting}}</td>
+                                            <td>{{ note.datetime_ofmeeting}}</td>
                                         </tr>
                                     </table>
                                 </div>
