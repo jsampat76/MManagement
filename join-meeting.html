@@ -78,7 +78,7 @@
                                             <td>
                                                 <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename }}</a></span>
                                             </td>
-                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i>Director's Comment</a><br/><a ng-if="director == 1" href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
+                                            <td><a href="#" ng-click="getComments($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i>Director's Comment</a><br/><br/><a ng-if="director == 1" href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>
                                             <!--<td ng-if="director == 1"><a href="#" ng-click="getDNotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Director's Note</a></td>-->
 
                                         </tr>
