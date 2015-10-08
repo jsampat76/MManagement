@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="in.iCorpMM.iCorpMM" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.bluesystech.iCorpMM" version="1.0.0">
     <name>iCorpMM</name>
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayyuri86@gmail.com">Mayuri Dekhane</author>
