@@ -1,7 +1,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.bluesystech.iCorpMM" version="1.0.0">
     <name>iCorpMM</name>
     <description>Meeting Schedular for high designated Corporates.</description>
-    <author href="http://bluesys.in" email="jmayyuri86@gmail.com">Mayuri Dekhane</author>
+    <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
     <preference name="phonegap-version" value="cli-5.1.1" />
     <preference name="fullscreen" value="false" />
     <preference name="permissions" value="none"/>
