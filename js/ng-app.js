@@ -1,4 +1,4 @@
-var domain = "http://icorp.soft-craft.in/icorpmm/index.php/";
+var domain = "http://202.177.163.189:8080/icorpmm/index.php/";
 
 var store;
 
@@ -210,36 +210,36 @@ app.controller('joinMeetingController', function ($scope, $http) {
             success: function (response) {
 
 
-                $.each((response.agenda), function (key, value) {
-
-
-                    $.each((value.attachments), function (k, v) {
-
-                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
-                        fileName = v.saved_filename;  // using an absolute path also does not work
-                        store = cordova.file.dataDirectory;
-
-
-                        // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
-
-                        var fileTransfer = new FileTransfer();
-                        $('.spinner').show();
-                        fileTransfer.download(assetURL, store + fileName,
-                                function (entry) {
-                                    //  alert(JSON.stringify(entry));
-                                    $('.spinner').fadeOut(1000);
-                                },
-                                function (err) {
-                                    $('.spinner').fadeOut(1000);
-                                  
-                                    //  alert(JSON.stringify(err));
-                                });
-
-
-
-
-                    });
-                });
+//                $.each((response.agenda), function (key, value) {
+//
+//
+//                    $.each((value.attachments), function (k, v) {
+//
+//                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+//                        fileName = v.saved_filename;  // using an absolute path also does not work
+//                        store = cordova.file.dataDirectory;
+//
+//
+//                        // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+//
+//                        var fileTransfer = new FileTransfer();
+//                        $('.spinner').show();
+//                        fileTransfer.download(assetURL, store + fileName,
+//                                function (entry) {
+//                                    //  alert(JSON.stringify(entry));
+//                                    $('.spinner').fadeOut(1000);
+//                                },
+//                                function (err) {
+//                                    $('.spinner').fadeOut(1000);
+//                                  
+//                                    //  alert(JSON.stringify(err));
+//                                });
+//
+//
+//
+//
+//                    });
+//                });
 
 
 
@@ -598,36 +598,36 @@ app.controller('rbcController', function ($scope, $http) {
             success: function (response) {
                 window.localStorage.setItem("rbc", JSON.stringify(response));
 
-                $.each((response), function (key, value) {
-
-
-                    $.each((value.attachments), function (k, v) {
-
-                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
-                        fileName = v.saved_filename;  // using an absolute path also does not work
-                        store = cordova.file.dataDirectory;
-
-
-                        // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
-
-                        var fileTransfer = new FileTransfer();
-                        $('.spinner').show();
-                        fileTransfer.download(assetURL, store + fileName,
-                                function (entry) {
-                                    //  alert(JSON.stringify(entry));
-                                    $('.spinner').fadeOut(1000);
-                                },
-                                function (err) {
-                                    $('.spinner').fadeOut(1000);
-                                
-                                    //  alert(JSON.stringify(err));
-                                });
-
-
-
-
-                    });
-                });
+//                $.each((response), function (key, value) {
+//
+//
+//                    $.each((value.attachments), function (k, v) {
+//
+//                        assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+//                        fileName = v.saved_filename;  // using an absolute path also does not work
+//                        store = cordova.file.dataDirectory;
+//
+//
+//                        // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+//
+//                        var fileTransfer = new FileTransfer();
+//                        $('.spinner').show();
+//                        fileTransfer.download(assetURL, store + fileName,
+//                                function (entry) {
+//                                    //  alert(JSON.stringify(entry));
+//                                    $('.spinner').fadeOut(1000);
+//                                },
+//                                function (err) {
+//                                    $('.spinner').fadeOut(1000);
+//                                
+//                                    //  alert(JSON.stringify(err));
+//                                });
+//
+//
+//
+//
+//                    });
+//                });
 
                 $scope.$apply(function () {
                     $scope.rbc = response;
@@ -926,24 +926,3 @@ app.controller('reportsController', function ($scope, $http) {
         $('.spinner').fadeOut(1000);
     }
 });
-
-
-function downloadAsset() {
-    var fileTransfer = new FileTransfer();
-
-    fileTransfer.download(assetURL, store + fileName,
-            function (entry) {
-                alert(JSON.stringify(entry));
-            },
-            function (err) {
-                alert("Error");
-                alert(JSON.stringify(err));
-            });
-
-
-}
-
-//I'm only called when the file exists or has been downloaded.
-function appStart() {
-    alert("App ready!");
-}
