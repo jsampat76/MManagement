@@ -7,13 +7,13 @@ var assetURL;
 var fileName;
 
 var app = angular.module('iCorpMM', ['ngResource', 'ngSanitize']);
-
+/*
 app.filter('convertToDate', function () {
     return function (str) {
         return new Date(str);
     };
 });
-
+*/
 app.filter('unsafe', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
