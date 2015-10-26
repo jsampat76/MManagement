@@ -9,8 +9,8 @@
     
     <gap:platform name="ios" />
     
-    <icon src="icon.png" />
-    <gap:splash src="splash.png" />
+    <icon src="icon.png" gap:platform="ios" width="76" height="76"/>
+    <gap:splash src="splash.png" gap:platform="ios" width="750" height="1334"/>
     <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.5.2" />
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.2.0" />
