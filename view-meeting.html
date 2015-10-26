@@ -93,7 +93,7 @@
                                             <td>{{ blist.title}}</td>
                                             <td ng-bind-html="blist.body | base64decode | unsafe"></td>
                                             <td>
-                                                <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a></span>
+                                                <span ng-repeat="att in blist.attachments"><a href="#" ng-click="openlink(att.saved_filename)">{{ att.filename}}</a><br /></span>
                                             </td>
                                             <td><a href="#" ng-click="getVotes($event, blist.id, blist.title)" class="btn btn-xs btn-info"><i></i> Votes</a></td>
 
