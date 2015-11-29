@@ -369,7 +369,7 @@ function sync() {
 function downloadFile() {
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
-          $('#syncNow span').text( " Synced All Files");
+          $('#syncNow span').text( " Sync Completed!");
             return;
     }
     var rf = remoteFiles.pop();
@@ -401,12 +401,12 @@ function downloadAsset() {
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Synced");
+                $('#syncNow span').text("Syncing....");
                 downloadFile();
             },
             function (err) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Synced");
+                $('#syncNow span').text("Syncing....");
             });
 }
 
