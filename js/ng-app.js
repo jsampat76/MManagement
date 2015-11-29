@@ -85,12 +85,13 @@ app.controller('schedulerController', function ($scope, $http) {
 });
 
 app.controller('securityController', function ($scope) {
+   var usrpasswd = window.localStorage.getItem("userPassword");
    
     $scope.checkSecurity = function () {
-        if($scope.scode == "lic456"){
+        if($scope.scode == usrpasswd){
            window.location.href = "index.html";
         }else{
-           $("#securityResult").html("Sorry! Invalid Security Code");
+           $("#securityResult").html("Sorry! Invalid Password");
         }
        
     }
