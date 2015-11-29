@@ -82,12 +82,21 @@ app.controller('schedulerController', function ($scope, $http) {
         $scope.proposals = $.parseJSON(window.localStorage.getItem("proposals"));
         $('.spinner').fadeOut(1000);
     }
-
-
-
-
-
 });
+
+app.controller('securityController', function ($scope) {
+   
+    $scope.checkSecurity = function () {
+        if($scope.scode == "lic456"){
+           window.location.href = "index.html";
+        }else{
+           $("#securityResult").html("Sorry! Invalid Security Code");
+        }
+       
+    }
+    
+});
+
 
 app.controller('confirmTimingsController', function ($scope, $http) {
     $scope.user = window.localStorage.getItem("userDname");

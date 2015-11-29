@@ -369,9 +369,8 @@ function sync() {
 function downloadFile() {
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
-    $('#syncNow span').text( " Synced");
-  
-        return;
+          $('#syncNow span').text( " Synced All Files");
+            return;
     }
     var rf = remoteFiles.pop();
 

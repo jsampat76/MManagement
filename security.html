@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="iCorpMM">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+        <title>iCorpMM</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="dist/style.css" />
+        <link rel="stylesheet" href="dist/css/sidebar.css"/>
+    </head>
+
+    <body>
+       
+        <div id="wrapper">
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-default navbar-static-top custom-nav navbar-fixed-top">
+                    <div class="container-fluid custom-container-fluid">
+                        <div class="navbar-header">
+                        <div class="logo">  <a href="security.html"><img  alt="LIC" src="images/logo.png"></a></div>
+                         <div class="clear"></div>
+                         </div>      
+                    </div> 
+                </nav> 
+                <div class="container-fluid" ng-controller="securityController">
+                    <form ng-submit="checkSecurity()" name="security">
+                    <div class="row">
+                  <span id="securityResult" class="text-success text-center"></span>
+                    <div class="form-group col-md-12">
+                       <label for="scode">Security Code</label>
+                        <input type="scode" name="scode" id="scode" ng-model="scode" class="form-control" required>
+                        <div class="form-group col-md-12">
+                        <input type="submit" name="submit" id="submit" ng-model="submit" class="btn btn-success" ng-disabled="security.$invalid" />
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="phonegap.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src='js/angular-sanitize.min.js'></script>
+        <script src="dist/js/sidebar.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/ng-app.js"></script>      
+        <script src="js/myscripts.js"></script>      
+    </body>
+</html>
