@@ -79,7 +79,7 @@ $(document).ready(function () {
     $("#syncNow").bind("click", function () {
         if (navigator.onLine === true) {
             $('#syncNow i').addClass("fa-spin");
-            $('#syncNow span').text("Syncing ...");
+            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
 
             setTimeout(function () {
                 sync();
@@ -369,7 +369,7 @@ function sync() {
 function downloadFile() {
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
-          $('#syncNow span').text( " Sync Completed!");
+          $('#syncNow span').text( " Synced Completed with latest data,  please proceed.");
             return;
     }
     var rf = remoteFiles.pop();
@@ -401,12 +401,12 @@ function downloadAsset() {
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing....");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
                 downloadFile();
             },
             function (err) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing....");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
             });
 }
 
