@@ -16,7 +16,7 @@
     </platform>
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <gap:plugin name="cordova.inappbrowser" version="1.6.1" />
+    <gap:plugin name="cordova.inappbrowser" version="npm" />
     <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.2" />
     <gap:plugin name="nl.x-services.plugins.calendar" version="4.2.4" />  
