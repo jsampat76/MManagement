@@ -1,16 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.bluesystech.iCorpMM" version="2.0.0">
     <name>iCorpMM</name>
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
     <preference name="phonegap-version" value="cli-6.5.0" />
-    
-    
+     
     <gap:platform name="ios" />
-    <platform name="ios">
-        <!--<icon src="res/ios/icons/icon.png" width="100" height="100" />
-        <splash src="res/ios/splash/splash.png" width="1536" height="2048" />-->
-        <icon src="icon.png" />
-    </platform>
+    <icon src="icon.png" />
+   
     
      <!--
     <gap:splash src="splash.png" />
