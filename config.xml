@@ -7,6 +7,8 @@
     <icon src="res/icon.png" width="100" height="100" />
     <splash src="res/splash.png" width="1536" height="2048" />
     
+    <gap:platform name="ios" />
+    
     <plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.6.1" />
     <!--<plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.1.0" />-->
