@@ -4,17 +4,10 @@
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
     <preference name="phonegap-version" value="cli-6.5.0" />
-    
-    
-    <icon src="icon.png" gap:platform="ios" width="76" height="76"/>
+   
     <gap:platform name="ios" />
-    
-    <platform name="ios">
-        <!--<icon src="res/ios/icons/icon.png" width="100" height="100" />
-        <splash src="res/ios/splash/splash.png" width="1536" height="2048" />-->
-        <icon src="icon.png" />
-    </platform>
-    
+   
+    <icon src="icon.png" gap:platform="ios" width="200" height="200" />
     <gap:splash src="splash.png" />
    
     <preference name="fullscreen" value="false" />
@@ -34,8 +27,6 @@
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-file-transfer"/>
     <plugin name="cordova-plugin-splashscreen" source="npm" />
-
-   
     
     <access origin="*"/> <!-- allow all pages, use for development -->
     <access origin="*.pushwoosh.com"/> <!-- allow pushwoosh service -->
