@@ -30,6 +30,7 @@ app.controller('homeController', function ($scope, $http) {
 
     $scope.loggedin = window.localStorage.getItem("id") === null ? 0 : 1;
     $('.spinner').fadeOut(1000);
+    $scope.dateToday = new Date();
 });
 
 app.controller('loginController', function ($scope, $http) {
