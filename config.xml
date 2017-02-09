@@ -2,7 +2,7 @@
     <name>iCorpMM</name>
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
-    <preference name="phonegap-version" value="cli-5.1.1" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="fullscreen" value="false" />
     <preference name="permissions" value="none"/>
     <preference name="webviewbounce" value="true" />
