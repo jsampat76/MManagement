@@ -17,7 +17,7 @@
 
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <plugin name="cordova-plugin-inappbrowser" spec="~1.6.1" />
-    <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
+    <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" version="1.1.0" />
     <plugin name="ordova-plugin-calendar"/>  
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-file-transfer"/>
