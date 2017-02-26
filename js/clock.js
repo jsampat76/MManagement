@@ -1,14 +1,20 @@
 $(document).ready(function() {
     
 var month_Names = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+
+var month_shortNames = [ "Janu", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
     
 var day_Names= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 var new_Date = new Date();
 
-var mydate = new_Date.toLocaleString('en-GB', {day:'numeric',month:'short', year:'numeric', });
+var mydate = new_Date.toLocaleString('en', {day:'numeric',month:'short', year:'numeric' });
 
-$("#Date").html(mydate);
+var FromDate = new_Date.getFullYear() + ' -' + ('0' + (new_Date.getMonth() + 1)).slice(-2) + ' -' + ('0' + new_Date.getDate()).slice(-2);
+
+var CurrentDate = ('0' + new_Date.getDate()).slice(-2)+' '+month_shortNames[new_Date.getMonth()] + ' ' + new_Date.getFullYear()+' ';
+
+alert(month_Names[new_Date.getMonth()]);
 
 
 new_Date.setDate(new_Date.getDate());
@@ -20,9 +26,13 @@ new_Date.setDate(new_Date.getDate());
 var myhour = new_Date.toLocaleString('en-GB', {hour12: true, });
 setInterval( function() {
     
-   $("#date").html(mydate+",");
+  // $("#date").html(new_Date.getDate()+"/"+new_Date.getMonth()+"/"+new_Date.getFullYear());
+  $("#date").html(CurrentDate);
    }, 1000);
-  
+ 
+   
+   
+   
 setInterval( function() {
    var hours =getHoursnow()
    $("#hours").html(hours);

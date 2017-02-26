@@ -587,7 +587,7 @@ ul { width:100%; margin:0 auto; padding:0px; list-style:none; text-align:center;
 ul li { display:inline; font-size:1.5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-s
 rif; text-shadow:0 0 2px #fff; }
 #point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padd
-ng-left:2px; padding-right:2px; }
+ng-left:2px; }
 @-webkit-keyframes mymove
 {
 0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
