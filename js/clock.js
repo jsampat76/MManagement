@@ -14,8 +14,6 @@ var FromDate = new_Date.getFullYear() + ' -' + ('0' + (new_Date.getMonth() + 1))
 
 var CurrentDate = ('0' + new_Date.getDate()).slice(-2)+' '+month_shortNames[new_Date.getMonth()] + ' ' + new_Date.getFullYear()+' ';
 
-alert(month_Names[new_Date.getMonth()]);
-
 
 new_Date.setDate(new_Date.getDate());
 
@@ -85,7 +83,7 @@ return result;
 //////////////////////////
 var today=new Date();
 var noon=new Date(today.getFullYear(),today.getMonth(),today.getDate(),12,0,0);
-var ampm = (today.getTime()<noon.getTime())?'am':'pm';
+var ampm = (today.getTime()<noon.getTime())?'AM':'PM';
 
   
    setInterval( function() {
