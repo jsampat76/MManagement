@@ -555,6 +555,11 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
 
 .modal-dialog{   z-index: 999999999; }
 
+.align-middle {
+  margin-top: 25%;
+  margin-bottom: 25%;
+}
+
 .middlev {
   margin-top: 25%;
   margin-bottom: 25%;
@@ -579,23 +584,3 @@ table.rank-property  tr td{border-top:0 !important; border-color:#fff;}
   background-color:#FA8072;
 }
 
-/////////////////////
-
-.clock {width:30%; margin:0 auto; padding:30px; border:1px solid #333; color:#fff; }
-#Date { font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; font-size:15px; text-align:center; text-shado:0 0 5px #00c6ff; border:1px solid black;width:200px;float:left;}
-ul { width:100%; margin:0 auto; padding:0px; list-style:none; text-align:center; }
-ul li { display:inline; font-size:1.5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-s
-rif; text-shadow:0 0 2px #fff; }
-#point { position:relative; -moz-animation:mymove 1s ease infinite; -webkit-animation:mymove 1s ease infinite; padd
-ng-left:2px; }
-@-webkit-keyframes mymove
-{
-0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
-50% {opacity:0; text-shadow:none; }
-100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
-}@-moz-keyframes mymove
-{
-0% {opacity:1.0; text-shadow:0 0 20px #00c6ff;}
-50% {opacity:0; text-shadow:none; }
-100% {opacity:1.0; text-shadow:0 0 20px #00c6ff; }
-}

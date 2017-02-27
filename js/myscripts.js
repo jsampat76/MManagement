@@ -78,9 +78,10 @@ $(document).ready(function () {
 
     $("#syncNow").bind("click", function () {
         if (navigator.onLine === true) {
+            remoteFiles = [];
             $('#syncNow i').addClass("fa-spin");
             $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
-
+            
             setTimeout(function () {
                 sync();
             }, 1000);
@@ -148,7 +149,6 @@ function initPushwoosh() {
 
 
 function sync() {
-
     $.ajax({
         url: domain + "scheduler",
         type: 'GET',
@@ -163,6 +163,9 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
+                    beforeSend:function(){
+                        $('#syncNow span').text("Syncing Scheduler..");
+                    },
                     success: function (response) {
                         window.localStorage.setItem("schedule_" + response.id, JSON.stringify(response));
                     }
@@ -185,6 +188,9 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
+                    beforeSend:function(){
+                        $('#syncNow span').text("Syncing Meetings..");
+                    },
                     success: function (response) {
                         window.localStorage.setItem("meeting_" + response.id, JSON.stringify(response));
                         $.each((response.agenda), function (key, value) {
@@ -238,6 +244,9 @@ function sync() {
         url: domain + "rbc",
         type: 'GET',
         data: {userId: window.localStorage.getItem("id")},
+        beforeSend:function(){
+                        $('#syncNow span').text("Syncing rbc..");
+                    },
         success: function (response) {
             window.localStorage.setItem("rbc", JSON.stringify(response));
 
@@ -267,6 +276,9 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
+                    beforeSend:function(){
+                        $('#syncNow span').text("Syncing Archives..");
+                    },
                     success: function (response) {
                         window.localStorage.setItem("meeting_" + response.id, JSON.stringify(response));
                         $.each((response.agenda), function (key, value) {
@@ -320,6 +332,9 @@ function sync() {
         type: 'GET',
         async: false,
         data: {id: window.localStorage.getItem("id")},
+        beforeSend:function(){
+                        $('#syncNow span').text("Syncing Reports..");
+                    },
         success: function (response) {
             window.localStorage.setItem("reports", JSON.stringify(response));
 
