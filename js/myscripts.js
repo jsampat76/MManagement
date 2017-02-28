@@ -397,10 +397,7 @@ function downloadFile() {
     store = cordova.file.dataDirectory;
     alias = rf[1];
 
-
-
     window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
-
 
 }
 
