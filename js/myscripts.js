@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        initPushwoosh();
+        //initPushwoosh();
     }, false);
 
 
