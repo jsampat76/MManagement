@@ -27,8 +27,6 @@ $(document).ready(function () {
 
     document.addEventListener('deviceready', function () {
         initPushwoosh();
-
-
     }, false);
 
 
@@ -36,7 +34,7 @@ $(document).ready(function () {
 
 
 
-    if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
+ if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
         window.localStorage.setItem("toSync", JSON.stringify([]));
     } else {
         if (navigator.onLine === true) {
@@ -53,12 +51,7 @@ $(document).ready(function () {
 
                     }
                 });
-
-
             });
-
-
-
         }
     }
 
@@ -78,9 +71,8 @@ $(document).ready(function () {
 
     $("#syncNow").bind("click", function () {
         if (navigator.onLine === true) {
-            remoteFiles = [];
             $('#syncNow i').addClass("fa-spin");
-            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
+            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--syncnow");
             
             setTimeout(function () {
                 sync();
@@ -120,10 +112,7 @@ function initPushwoosh() {
     document.addEventListener('push-notification', function (event) {
         //get the notification payload
         var notification = event.notification;
-
         //display alert to the user for example
-
-
         //clear the app badge
         pushNotification.setApplicationIconBadgeNumber(0);
     });
@@ -142,7 +131,6 @@ function initPushwoosh() {
                 // alert(JSON.stringify(['failed to register ', status]));
             }
     );
-
     //reset badges on app start
     pushNotification.setApplicationIconBadgeNumber(0);
 }
@@ -384,7 +372,7 @@ function sync() {
 function downloadFile() {
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
-          $('#syncNow span').text( " Synced Completed with latest data,  please proceed.");
+          $('#syncNow span').text( "Synced Completed with latest data,  please proceed.");
             return;
     }
     var rf = remoteFiles.pop();
@@ -413,12 +401,12 @@ function downloadAsset() {
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--download1");
                 downloadFile();
             },
             function (err) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--downloa2");
             });
 }
 
