@@ -325,7 +325,6 @@ function sync() {
                     },
         success: function (response) {
             window.localStorage.setItem("reports", JSON.stringify(response));
-
         }
     });
 
