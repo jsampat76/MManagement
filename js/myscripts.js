@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        //initPushwoosh();
+        initPushwoosh();
     }, false);
 
 
@@ -325,6 +325,7 @@ function sync() {
                     },
         success: function (response) {
             window.localStorage.setItem("reports", JSON.stringify(response));
+
         }
     });
 

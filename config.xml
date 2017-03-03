@@ -4,10 +4,6 @@
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
     <content src="index.html" />
-    <preference name="phonegap-version" value="cli-6.5.0" />
-    <gap:plugin name="cordova-plugin-customurlscheme" source="npm">
-        <param name="URL_SCHEME" value="icorpmm" />
-    </gap:plugin>
     
     <access origin="*" />
     <allow-intent href="http://*/*" />
