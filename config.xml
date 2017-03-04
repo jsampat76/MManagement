@@ -4,7 +4,8 @@
     <description>Meeting Schedular for high designated Corporates.</description>
     <author href="http://bluesys.in" email="jmayuri86@gmail.com">Mayuri Dekhane</author>
     <content src="index.html"></content>
-    
+    <preference name="phonegap-version" value="cli-6.5.0" />
+
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -19,7 +20,8 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-
+    
+    <preference name="permissions" value="none"/>
     <preference name="orientation" value="default"/>
     <preference name="webviewbounce" value="false"/>
     <preference name="UIWebViewBounce" value="false"/>
@@ -48,6 +50,7 @@
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-file-transfer" />
+    <plugin name="cordova-plugin-calendar" />
     <plugin name="cordova-plugin-geolocation" />
     <plugin name="cordova-plugin-globalization" />
     <plugin name="cordova-plugin-inappbrowser" />
