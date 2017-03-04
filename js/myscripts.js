@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        initPushwoosh();
+        //initPushwoosh();
     }, false);
 
 
@@ -77,6 +77,7 @@ $(document).ready(function () {
             setTimeout(function () {
                 sync();
             }, 1000);
+            
         } else {
             $('#syncNow span').text("Please Connect to the Internet first");
         }
