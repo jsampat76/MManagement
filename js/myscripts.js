@@ -148,7 +148,7 @@ function initPushwoosh() {
 
 
 function sync() {
-
+  alert("Called Sync Function");
     $.ajax({
         url: domain + "scheduler",
         type: 'GET',
@@ -354,19 +354,21 @@ function sync() {
         async: false,
         data: {userId: window.localStorage.getItem("id")},
         success: function (response) {
+            alert("DISC");
             window.localStorage.setItem("disc", JSON.stringify(response));
             $('#syncNow i').removeClass("fa-spin");
             $('#syncNow span').text("Synced");
 
         }
     });
-
+    
     console.log(remoteFiles.length);
     downloadFile();
 }
 
 
 function downloadFile() {
+    alert("Files- "+remoteFiles.length);
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
           $('#syncNow span').text( " Synced Completed with latest data,  please proceed.");
@@ -381,7 +383,7 @@ function downloadFile() {
     fileName = rf[0];  // using an absolute path also does not work
     store = cordova.file.dataDirectory;
     alias = rf[1];
-
+alert("store-"+store);
 
 
     window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
@@ -390,6 +392,7 @@ function downloadFile() {
 }
 
 function downloadAsset() {
+    alert("DownloadAssest-");
     var fileTransfer = new FileTransfer();
     fileTransfer.onprogress = function (progressEvent) {
         $('#syncNow i').addClass("fa-spin");
