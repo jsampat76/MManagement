@@ -73,12 +73,11 @@ $(document).ready(function () {
         if (navigator.onLine === true) {
             $('#syncNow i').addClass("fa-spin");
             $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--syncnow");
-            sync();
-            /*
+            
             setTimeout(function () {
                 sync();
             }, 1000);
-            */
+            
         } else {
             $('#syncNow span').text("Please Connect to the Internet first");
         }
