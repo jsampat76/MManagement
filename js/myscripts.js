@@ -73,6 +73,7 @@ $(document).ready(function () {
         if (navigator.onLine === true) {
             $('#syncNow i').addClass("fa-spin");
             $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--syncnow");
+            sync();
             /*
             setTimeout(function () {
                 sync();
