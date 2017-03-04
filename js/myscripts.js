@@ -26,7 +26,9 @@ $(document).ready(function () {
 
 
     document.addEventListener('deviceready', function () {
-        //initPushwoosh();
+        initPushwoosh();
+
+
     }, false);
 
 
@@ -34,7 +36,7 @@ $(document).ready(function () {
 
 
 
- if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
+    if (window.localStorage.getItem("toSync") === null || window.localStorage.getItem("toSync") === "") {
         window.localStorage.setItem("toSync", JSON.stringify([]));
     } else {
         if (navigator.onLine === true) {
@@ -51,7 +53,12 @@ $(document).ready(function () {
 
                     }
                 });
+
+
             });
+
+
+
         }
     }
 
@@ -72,12 +79,11 @@ $(document).ready(function () {
     $("#syncNow").bind("click", function () {
         if (navigator.onLine === true) {
             $('#syncNow i').addClass("fa-spin");
-            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--syncnow");
-            
+            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
+
             setTimeout(function () {
                 sync();
             }, 1000);
-            
         } else {
             $('#syncNow span').text("Please Connect to the Internet first");
         }
@@ -105,7 +111,44 @@ function toSync(url, data) {
     window.localStorage.setItem("toSync", JSON.stringify(toSync));
 }
 
+
+function initPushwoosh() {
+    var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
+
+    //set push notification callback before we initialize the plugin
+    document.addEventListener('push-notification', function (event) {
+        //get the notification payload
+        var notification = event.notification;
+
+        //display alert to the user for example
+
+
+        //clear the app badge
+        pushNotification.setApplicationIconBadgeNumber(0);
+    });
+
+    //initialize the plugin
+    pushNotification.onDeviceReady({pw_appid: "3E31C-54A41"});
+
+    //register for pushes
+    pushNotification.registerDevice(
+            function (status) {
+                var deviceToken = status['deviceToken'];
+                window.localStorage.setItem('oneSignalId', deviceToken);
+            },
+            function (status) {
+                console.warn('failed to register : ' + JSON.stringify(status));
+                // alert(JSON.stringify(['failed to register ', status]));
+            }
+    );
+
+    //reset badges on app start
+    pushNotification.setApplicationIconBadgeNumber(0);
+}
+
+
 function sync() {
+
     $.ajax({
         url: domain + "scheduler",
         type: 'GET',
@@ -120,9 +163,6 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
-                    beforeSend:function(){
-                        $('#syncNow span').text("Syncing Scheduler..");
-                    },
                     success: function (response) {
                         window.localStorage.setItem("schedule_" + response.id, JSON.stringify(response));
                     }
@@ -145,9 +185,6 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
-                    beforeSend:function(){
-                        $('#syncNow span').text("Syncing Meetings..");
-                    },
                     success: function (response) {
                         window.localStorage.setItem("meeting_" + response.id, JSON.stringify(response));
                         $.each((response.agenda), function (key, value) {
@@ -201,9 +238,6 @@ function sync() {
         url: domain + "rbc",
         type: 'GET',
         data: {userId: window.localStorage.getItem("id")},
-        beforeSend:function(){
-                        $('#syncNow span').text("Syncing rbc..");
-                    },
         success: function (response) {
             window.localStorage.setItem("rbc", JSON.stringify(response));
 
@@ -233,9 +267,6 @@ function sync() {
                     type: 'GET',
                     async: false,
                     data: {id: value.id, userId: window.localStorage.getItem("id")},
-                    beforeSend:function(){
-                        $('#syncNow span').text("Syncing Archives..");
-                    },
                     success: function (response) {
                         window.localStorage.setItem("meeting_" + response.id, JSON.stringify(response));
                         $.each((response.agenda), function (key, value) {
@@ -289,9 +320,6 @@ function sync() {
         type: 'GET',
         async: false,
         data: {id: window.localStorage.getItem("id")},
-        beforeSend:function(){
-                        $('#syncNow span').text("Syncing Reports..");
-                    },
         success: function (response) {
             window.localStorage.setItem("reports", JSON.stringify(response));
 
@@ -341,7 +369,7 @@ function sync() {
 function downloadFile() {
     if (remoteFiles.length == 0) {
           $('#syncNow i').removeClass("fa-spin");
-          $('#syncNow span').text( "Synced Completed with latest data,  please proceed.");
+          $('#syncNow span').text( " Synced Completed with latest data,  please proceed.");
             return;
     }
     var rf = remoteFiles.pop();
@@ -354,7 +382,10 @@ function downloadFile() {
     store = cordova.file.dataDirectory;
     alias = rf[1];
 
+
+
     window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
 
 }
 
@@ -370,12 +401,12 @@ function downloadAsset() {
     fileTransfer.download(assetURL, store + fileName,
             function (entry) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--download1");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
                 downloadFile();
             },
             function (err) {
                 $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs--downloa2");
+                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
             });
 }
 
@@ -385,36 +416,3 @@ function appStart() {
     downloadFile();
 
 }
-
-
-
-function initPushwoosh() {
-    var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
-
-    //set push notification callback before we initialize the plugin
-    document.addEventListener('push-notification', function (event) {
-        //get the notification payload
-        var notification = event.notification;
-        //display alert to the user for example
-        //clear the app badge
-        pushNotification.setApplicationIconBadgeNumber(0);
-    });
-
-    //initialize the plugin
-    pushNotification.onDeviceReady({pw_appid: "3E31C-54A41"});
-
-    //register for pushes
-    pushNotification.registerDevice(
-            function (status) {
-                var deviceToken = status['deviceToken'];
-                window.localStorage.setItem('oneSignalId', deviceToken);
-            },
-            function (status) {
-                console.warn('failed to register : ' + JSON.stringify(status));
-                // alert(JSON.stringify(['failed to register ', status]));
-            }
-    );
-    //reset badges on app start
-    pushNotification.setApplicationIconBadgeNumber(0);
-}
-
