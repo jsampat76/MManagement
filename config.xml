@@ -31,6 +31,8 @@
     <preference name="AutoHideSplashScreen" value="true"/>
     <preference name="ShowSplashScreenSpinner" value="false"/>
     <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="ErrorUrl" value="error.html"/>
+
     
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar"/>
