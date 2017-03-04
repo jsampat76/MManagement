@@ -1,10 +1,3 @@
-var remoteFiles = [];
-var assetURL;
-var fileName;  // using an absolute path also does not work
-var store;
-var alias;
-
-
 function progress(e) {
     if (e.lengthComputable) {
         //this makes a nice fancy progress bar
@@ -79,7 +72,7 @@ $(document).ready(function () {
     $("#syncNow").bind("click", function () {
         if (navigator.onLine === true) {
             $('#syncNow i').addClass("fa-spin");
-            $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
+            $('#syncNow span').text("Syncing ...");
 
             setTimeout(function () {
                 sync();
@@ -148,7 +141,11 @@ function initPushwoosh() {
 
 
 function sync() {
-  alert("Called Sync Function");
+
+
+
+
+
     $.ajax({
         url: domain + "scheduler",
         type: 'GET',
@@ -223,7 +220,22 @@ function sync() {
 
 
                             $.each((value.attachments), function (k, v) {
-                                remoteFiles.push(v.saved_filename + "||" + v.filename);
+                                assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                                fileName = v.saved_filename;  // using an absolute path also does not work
+                                store = cordova.file.dataDirectory;
+                                var fileTransfer = new FileTransfer();
+                                $('#syncNow i').addClass("fa-spin");
+                                $('#syncNow span').text("Syncing Meeting Attachments ...");
+                                fileTransfer.download(assetURL, store + fileName,
+                                        function (entry) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
+                                        },
+                                        function (err) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
+
+                                        });
                             });
                         });
 
@@ -233,6 +245,8 @@ function sync() {
 
         }
     });
+
+
 
     $.ajax({
         url: domain + "rbc",
@@ -245,13 +259,36 @@ function sync() {
 
 
                 $.each((value.attachments), function (k, v) {
-                    remoteFiles.push(v.saved_filename + "||" + v.filename);
+
+                    assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                    fileName = v.saved_filename;  // using an absolute path also does not work
+                    store = cordova.file.dataDirectory;
+
+
+                    // window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
+
+                    var fileTransfer = new FileTransfer();
+                    $('#syncNow i').addClass("fa-spin");
+                    $('#syncNow span').text("Syncing RBC Attachments ...");
+                    fileTransfer.download(assetURL, store + fileName,
+                            function (entry) {
+                                //  alert(JSON.stringify(entry));
+                                $('#syncNow i').removeClass("fa-spin");
+                                $('#syncNow span').text("Synced");
+                            },
+                            function (err) {
+                                $('#syncNow i').removeClass("fa-spin");
+                                $('#syncNow span').text("Synced");
+                                //  alert(JSON.stringify(err));
+                            });
+
                 });
             });
 
 
         }
     });
+
 
     $.ajax({
         url: domain + "archive",
@@ -305,7 +342,21 @@ function sync() {
 
 
                             $.each((value.attachments), function (k, v) {
-                                remoteFiles.push(v.saved_filename + "||" + v.filename);
+                                assetURL = "http://icorp.soft-craft.in/data/attachments/" + v.saved_filename;
+                                fileName = v.saved_filename;  // using an absolute path also does not work
+                                store = cordova.file.dataDirectory;
+                                var fileTransfer = new FileTransfer();
+                                $('#syncNow i').addClass("fa-spin");
+                                $('#syncNow span').text("Syncing Archive Attachments ...");
+                                fileTransfer.download(assetURL, store + fileName,
+                                        function (entry) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
+                                        },
+                                        function (err) {
+                                            $('#syncNow i').removeClass("fa-spin");
+                                            $('#syncNow span').text("Synced");
+                                        });
                             });
                         });
 
@@ -314,6 +365,8 @@ function sync() {
             });
         }
     });
+
+
 
     $.ajax({
         url: domain + "reports",
@@ -325,6 +378,7 @@ function sync() {
 
         }
     });
+
 
     $.ajax({
         url: domain + "profile",
@@ -354,68 +408,12 @@ function sync() {
         async: false,
         data: {userId: window.localStorage.getItem("id")},
         success: function (response) {
-            alert("DISC");
             window.localStorage.setItem("disc", JSON.stringify(response));
             $('#syncNow i').removeClass("fa-spin");
             $('#syncNow span').text("Synced");
 
         }
     });
-    
-    console.log(remoteFiles.length);
-    downloadFile();
-}
 
-
-function downloadFile() {
-    alert("Files- "+remoteFiles.length);
-    if (remoteFiles.length == 0) {
-          $('#syncNow i').removeClass("fa-spin");
-          $('#syncNow span').text( " Synced Completed with latest data,  please proceed.");
-            return;
-    }
-    var rf = remoteFiles.pop();
-
-    rf = rf.split("||");
-
-
-    assetURL = "http://202.177.163.189:8080/data/attachments/" + rf[0];
-    fileName = rf[0];  // using an absolute path also does not work
-    store = cordova.file.dataDirectory;
-    alias = rf[1];
-    alert("store-"+store);
-
-
-    window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
-
-
-}
-
-function downloadAsset() {
-    alert("DownloadAssest-");
-    var fileTransfer = new FileTransfer();
-    fileTransfer.onprogress = function (progressEvent) {
-        $('#syncNow i').addClass("fa-spin");
-        $('#syncNow span').text("Downloading Attachment " + alias);
-
-
-    };
-
-    fileTransfer.download(assetURL, store + fileName,
-            function (entry) {
-                $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
-                downloadFile();
-            },
-            function (err) {
-                $('#syncNow i').removeClass("fa-spin");
-                $('#syncNow span').text("Syncing.....Please do not click on any icons\/tabs");
-            });
-}
-
-function appStart() {
-    $('#syncNow i').removeClass("fa-spin");
-    $('#syncNow span').text(alias + " Already Present");
-    downloadFile();
 
 }
