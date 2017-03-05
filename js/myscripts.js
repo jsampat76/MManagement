@@ -362,13 +362,13 @@ function sync() {
             window.localStorage.setItem("disc", JSON.stringify(response));
             $('#syncNow i').removeClass("fa-spin");
             $('#syncNow span').text("Synced");
-
+            //alert("Files="+remoteFiles.length);
+            console.log(cordova.file.dataDirectory);
+            console.log(remoteFiles.length);
+            downloadFile();
         }
     });
-    //alert("Files="+remoteFiles.length);
-    console.log(cordova.file.dataDirectory);
-    console.log(remoteFiles.length);
-    downloadFile();
+    
     
 }
 
