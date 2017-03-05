@@ -360,7 +360,7 @@ function sync() {
 
         }
     });
-
+    alert("Directory="+cordova.file.dataDirectory);
     console.log(remoteFiles.length);
     downloadFile();
 }
@@ -381,8 +381,6 @@ function downloadFile() {
     fileName = rf[0];  // using an absolute path also does not work
     store = cordova.file.dataDirectory;
     alias = rf[1];
-
-
 
     window.resolveLocalFileSystemURL(store + fileName, appStart, downloadAsset);
 
