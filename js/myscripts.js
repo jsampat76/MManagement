@@ -366,7 +366,7 @@ function sync() {
         }
     });
     //alert("Files="+remoteFiles.length);
-    //alert("Directory="+cordova.file.dataDirectory);
+    console.log(cordova.file.dataDirectory);
     console.log(remoteFiles.length);
     downloadFile();
     
