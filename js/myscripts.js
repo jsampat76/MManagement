@@ -27,9 +27,13 @@ $(document).ready(function () {
 
     document.addEventListener('deviceready', function () {
         initPushwoosh();
-
-
     }, false);
+    
+    document.addEventListener('deviceready', onDeviceReadyfile,false);
+ 
+        function onDeviceReadyfile() {
+        console.log(cordova.file);
+        };
 
 
 
