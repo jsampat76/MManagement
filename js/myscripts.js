@@ -364,6 +364,7 @@ function sync() {
     alert("Directory="+cordova.file.dataDirectory);
     console.log(remoteFiles.length);
     downloadFile();
+    
 }
 
 
