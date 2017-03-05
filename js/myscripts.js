@@ -32,6 +32,7 @@ $(document).ready(function () {
     document.addEventListener('deviceready', onDeviceReadyfile,false);
  
         function onDeviceReadyfile() {
+            alert(cordova.file);
         console.log(cordova.file);
         };
 
@@ -364,8 +365,8 @@ function sync() {
 
         }
     });
-    alert("Files="+remoteFiles.length);
-    alert("Directory="+cordova.file.dataDirectory);
+    //alert("Files="+remoteFiles.length);
+    //alert("Directory="+cordova.file.dataDirectory);
     console.log(remoteFiles.length);
     downloadFile();
     
